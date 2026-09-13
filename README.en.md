@@ -43,6 +43,8 @@ Expect evidence-based gaps and inconsistencies, not permission to trade. The pac
 
 Each skill and text adapter includes an optional [12-lesson author experience library](shared/author-experience.md) with [source notes](shared/author-sources.md), contexts, review questions and boundaries (Chinese). Inclusion does not make a lesson a user's rule. Explicit adoption is respected without repeated confirmation; numeric examples such as risk/reward ratios, loss counts and position proportions remain separate choices. The bundled source description is “根据作者经验” (“based on the author’s experience”). It is independent of personal identities and local projects, and needs no network access at runtime.
 
+The author experience library will continue to be updated and refined. Feedback, suggestions, and requests for additional scenarios are welcome through [Issues](https://github.com/catgrandfa/trade-review-skills/issues).
+
 ## Development
 
 Python 3.10+ standard library only:
