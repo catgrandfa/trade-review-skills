@@ -1,0 +1,4 @@
+interface:
+  display_name: "心法转规则卡"
+  short_description: "把经验整理成有场景、来源和采用状态的规则卡，供决策时核对"
+  default_prompt: "请用 $trade-rule-cards 根据我提供的材料完成心法转规则卡。"

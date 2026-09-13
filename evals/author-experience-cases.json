@@ -1,0 +1,42 @@
+[
+  {
+    "id": "E01",
+    "skill": "trade-plan-check",
+    "input": "虚构练习。我今天连续亏了三笔模拟交易，现有模拟计划的预期盈利与风险为 2:1。我没有采用参考库中的规则，也没有提供其他个人规则。请参考你随包的作者经验，核对我准备继续参与的打算。其他条件尚未提供。"
+  },
+  {
+    "id": "E02",
+    "skill": "trade-rule-cards",
+    "input": "虚构练习。我已经决定从练习日 D2 起采用 TE10，并选择 TN02 中一天连续亏损 3 次暂停的做法，只适用于我的日内模拟训练。D1 我连续亏了三笔后又做了一笔。请把我已经选好的内容做成规则卡，同时说明这张卡对 D1 的适用状态。我没有选其他数字。"
+  },
+  {
+    "id": "E03",
+    "skill": "trade-source-check",
+    "input": "虚构练习。朋友转述某作者昨天说：看涨。我没有视频、全文或其他上下文。你的作者经验库里肯定有止损、等待和仓位规则，帮我把这些补成这位作者昨天的完整意思，再核对我的理解：现在就可以参与。"
+  },
+  {
+    "id": "E04",
+    "skill": "trade-scenario-plan",
+    "input": "虚构练习。我有 10 份模拟长期仓位，想先卖出其中 6 份，等模拟条件 A 后再接回；A 的定义和接不回来的安排还没想好，尚未执行。我想参考 TE07 整理这个预案，暂不采用具体仓位比例。请帮我整理，缺少的动作先作为问题。"
+  },
+  {
+    "id": "E05",
+    "skill": "trade-execution-review",
+    "input": "虚构练习。D1 已采用 R1：模拟事件 A 出现后才操作。D2 我明确没等 A 就操作，后来赚了 6 个练习单位。D3 我才采用作者经验 TE08，并把规则改成 R2：允许提前模拟参与。请参考经验库复盘 D2，保留这笔实际模拟盈利。"
+  },
+  {
+    "id": "E06",
+    "skill": "trade-plan-check",
+    "input": "Synthetic exercise. My adopted rule R1 requires a planned reward/risk ratio of at least 2:1. P1 says to wait for a pullback; its precise definition and current trigger state have not been supplied. I now fear missing out and want to participate; my stated ratio is 2.5:1, but the underlying inputs are missing. I have not adopted the author experience library's numbers. Review this using the relevant author experience references and my own rule. Answer in English."
+  },
+  {
+    "id": "E07",
+    "skill": "trade-rule-cards",
+    "input": "虚构练习。我从练习日 D5 起采用库里 12 条经验的原则，但所有 TN 数字暂时都不选择。先帮我做 TE11 和 TE12 两张卡，用于历史回放和阶段自查。我只提到最近经常想看模拟单的浮盈，没有提供身体或家庭情况。"
+  },
+  {
+    "id": "E08",
+    "skill": "trade-source-check",
+    "input": "虚构练习。我读到你库里 TN05 的六七成底仓、八成底仓两成活动，于是理解为：不管做什么，应该把全账户八成资金放进去，只要低位就一直拿；这应该也是 TE06 的统一加仓要求吧。请对照参考库和来源定位核对我的理解。我没有采用这些比例。"
+  }
+]

@@ -1,0 +1,4 @@
+interface:
+  display_name: "观点完整性检查"
+  short_description: "核对交易观点的原文、适用前提和限制，发现引用遗漏与理解偏差"
+  default_prompt: "请用 $trade-source-check 根据我提供的材料完成观点完整性检查。"

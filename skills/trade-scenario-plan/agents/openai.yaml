@@ -1,0 +1,4 @@
+interface:
+  display_name: "交易预案整理"
+  short_description: "把已有判断整理成条件分支，保留原始依据、待定义项和草案状态"
+  default_prompt: "请用 $trade-scenario-plan 根据我提供的材料完成交易预案整理。"
