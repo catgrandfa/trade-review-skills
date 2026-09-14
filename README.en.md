@@ -14,6 +14,8 @@ The [trade-review-suite](skills/trade-review-suite/SKILL.md) skill selects the r
 
 For local installation, add `--skill trade-review-suite` to the installer command below. The default still installs the five independent skills. All seven upload ZIPs in 0.3.1 omit the standalone `LICENSE` file and pass local package checks; skill content and metadata remain unchanged. The [SkillHub upload check](docs/skillhub-upload-check.md) covered the 23-file 0.3.0 package. Version 0.3.1 has not been retested on the platform; approval and installation remain unverified.
 
+Version 0.3.1 has since been installed and invoked in new WorkBuddy 5.5.6 tasks, and imported from its GitHub release ZIP into ChatGPT's account skill directory for use in a new Work conversation. The [product trial report](docs/product-trials-0.3.1.md) records the exact scope and two behavioral defects; successful installation does not mean every answer passed review.
+
 ## Ask your AI to install
 
 Paste this into your current agent:

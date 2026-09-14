@@ -10,9 +10,9 @@
 
 | 平台 | 本项目提供 | 官方依据 | 本次验证边界 |
 | --- | --- | --- | --- |
-| ChatGPT | 原生上传材料；Project 指令 + 知识文件；完整单文件文本 | [Skills 帮助](https://help.openai.com/en/articles/20001066-skills-in-chatgpt)、[Projects 帮助](https://help.openai.com/en/articles/10169521-using-projects-in-chatgpt) | 已核对入口及生成文件；未在用户 ChatGPT 账号导入或试跑 |
+| ChatGPT | 根部入口一体版 ZIP；Project 指令 + 知识文件；完整单文件文本 | [Build skills](https://learn.chatgpt.com/docs/build-skills)、[Projects 帮助](https://help.openai.com/en/articles/10169521-using-projects-in-chatgpt) | 0.3.1 ZIP 在账号技能页导入成功并从新对话调用；云端目录安装单独记录，见[实测](product-trials-0.3.1.md) |
 | Claude / Cowork | 五个单技能 ZIP，每包一个顶层目录 | [自定义技能](https://support.claude.com/en/articles/12512198-how-to-create-custom-skills)、[使用技能](https://support.claude.com/en/articles/12512180-use-skills-in-claude) | 已验证 ZIP 与引用自包含；未在 Claude 账号导入或试跑 |
-| WorkBuddy | 单技能 ZIP、本地项目 `.codebuddy/skills/` 安装、显式读取和文本适配 | [官方技能说明](https://www.codebuddy.cn/docs/workbuddy/From-Beginner-to-Expert-Guide/Function-Description/Skills-Market)、[项目配置](https://www.codebuddy.cn/docs/workbuddy/From-Beginner-to-Expert-Guide/Function-Description/Project) | 已核对上传入口与项目目录；未在 WorkBuddy 客户端导入或试跑 |
+| WorkBuddy | 用户级目录安装、单技能 ZIP、本地代码项目安装和文本适配 | [官方技能说明](https://www.codebuddy.cn/docs/workbuddy/From-Beginner-to-Expert-Guide/Function-Description/Skills-Market)、[项目配置](https://www.codebuddy.cn/docs/workbuddy/From-Beginner-to-Expert-Guide/Function-Description/Project) | 5.5.6 在 `~/.workbuddy/skills/` 安装 0.3.1，界面识别并在三个新任务调用；发现一项来源编号缺陷，见[实测](product-trials-0.3.1.md) |
 | Codex | `~/.agents/skills` 目录安装、OpenAI UI 元数据 | [Build skills](https://learn.chatgpt.com/docs/build-skills) | 安装器临时目录检查；当前版本未在客户端执行 |
 | Claude Code | `~/.claude/skills` 目录安装 | [Skills 文档](https://code.claude.com/docs/en/skills) | 临时目录结构检查；未在 Claude Code 执行 |
 | Cursor | `~/.cursor/skills` 目录安装 | [Skills 文档](https://cursor.com/docs/skills) | 临时目录结构检查；未在 Cursor 执行 |
@@ -26,9 +26,9 @@
 
 ## ChatGPT 入口差异
 
-截至核验日，OpenAI 帮助页列出的原生 Skills 面向符合条件的 Business、Enterprise、Healthcare、Edu 账号，并受工作区设置和产品可用性影响。不要假定所有个人 ChatGPT 账号都有同一入口；没有入口时仍可使用文本或 Project 适配。
+截至核验日，本次实际账号已提供原生 Skills 上传入口，并成功导入 0.3.1 一体版。入口受账号、工作区设置和产品可用性影响；不再仅根据旧帮助页的套餐列表推断个人账号一定不可用。没有入口时仍可使用文本或 Project 适配。
 
-该帮助页确认上传功能，但没有列出 ZIP 的精确格式契约。本项目的 ZIP 按 Agent Skills/Claude 单目录规范打包；ChatGPT 如不接受该文件类型，使用编辑器添加内容或文本适配，不称 ZIP 已通过 ChatGPT 官方导入验证。
+本次 ChatGPT 上传页明确接受 ZIP，实际接受了根部直接包含 `SKILL.md` 的一体版。文件夹版及其他格式没有在此入口实测；不要把一个入口的成功扩展成所有客户端的格式契约。
 
 ## 可移植性设计
 

@@ -62,7 +62,18 @@ skills/trade-rule-cards
 
 OpenAI 官方支持让安装器从其他仓库下载技能，见 [Build skills](https://learn.chatgpt.com/docs/build-skills)。内置安装器的版本可能使用自己的默认目录，采用它的实际说明并记录路径；本仓库独立脚本默认使用 `~/.agents/skills`，不要在两个位置重复安装同名技能。
 
-**WorkBuddy 当前项目版：**在已经打开本地工作项目的任务里发送：
+**WorkBuddy 桌面日常任务版：**本次在 5.5.6 的“我安装的”列表确认用户级目录可被识别：
+
+```text
+请从 https://github.com/catgrandfa/trade-review-skills 安装统一入口版 trade-review-suite。
+先读取 INSTALL.md，再将 skills/trade-review-suite 完整安装到用户级 ~/.workbuddy/skills，保留已有自定义内容。
+核对来源提交、VERSION 和全部配套文件；不要把当前任务的临时工作区当成用户级目录。
+在“我安装的”确认出现且启用，再用新任务确认技能调用；没有发现证据时如实说明。
+```
+
+这不是技能市场发布或跨设备同步证明。不要根据 `.codebuddy/skills` 不存在就判断它不受支持；下方的代码项目模式有独立官方依据。
+
+**WorkBuddy 当前代码项目版：**在已经打开本地工作项目的任务里发送：
 
 ```text
 请从 https://github.com/catgrandfa/trade-review-skills 安装全部 5 个 Skill 到当前工作项目。
@@ -82,7 +93,9 @@ OpenAI 官方支持让安装器从其他仓库下载技能，见 [Build skills](
 
 ## ChatGPT
 
-**有原生 Skills 入口的账号**：进入 Plugins → Skills → Create → Upload from your computer，按界面支持的文件类型上传单技能包。若界面只接受单文件，使用对应技能目录中的 `SKILL.md`，并按编辑器要求一并添加其 `references/`、`templates/` 资源；也可直接使用下面的文本适配方式。官方说明确认上传入口，但未在该帮助页规定 ZIP 的具体目录约束，因此不能承诺所有 ChatGPT 界面都接受与 Claude 相同的 ZIP。
+**网页工作模式从 GitHub 安装的实测边界：**0.3.1 完整文件可由当前云端环境安装器取得并校验；本次写入 `/root/.codex/skills/trade-review-suite`，后续轮次仍未在技能注册表中发现。显式要求读取该目录入口和配套模块可使用本轮材料，但不等于账号级原生技能、其他聊天可用或本机安装。随后改用下面的账号上传入口，成功导入同版本 GitHub 发布 ZIP，并在新对话中调用。具体范围见[产品实测记录](product-trials-0.3.1.md)。
+
+**有原生 Skills 入口的账号**：进入 Plugins → Skills → Create → Upload from your computer。本次中文界面为“插件 → 技能 → 创建 → 从电脑上传”，明确接受 `.zip`、`.skill` 或 `SKILL.md`；GitHub v0.3.1 的 `trade-review-suite.zip` 根部入口包已实测导入成功，随后在详情页选择“在聊天中试用”，保留技能引用并填写自己的材料。导入后核对五个 `modules/`、`references/` 和 `templates/`，不要只上传缺少资源的入口文件。其他账号若没有同样入口，使用下面的文本或 Project 方式。
 
 **没有 Skills 入口，或希望直接用普通聊天**：打开 [trade-review-suite.md](../adapters/plain-chat/trade-review-suite.md)，把全文作为初始说明贴入聊天，再提供材料。也可只使用[开单前核对文本](../adapters/plain-chat/trade-plan-check.md)。无需解压或执行代码。
 

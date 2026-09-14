@@ -35,6 +35,8 @@ git diff --check
 
 平台入口的文档依据见[兼容矩阵](compatibility.md)。2026-09-14 在 Edge 的 SkillHub 发布页验证了 v0.3.0 `trade-review-suite.zip`：页面识别 23 个文件、入口和描述，见[实测记录](skillhub-upload-check.md)。这仅证明该入口当时成功解析所选 ZIP，尚未提交审核或验证安装运行。
 
-当前版本仍没有 ClawHub、ChatGPT、Claude、WorkBuddy、Codex、Claude Code 或 Cursor 账号导入与产品内运行的验证结论。普通文本适配不应被报告为原生安装成功。
+0.3.1 后续在 WorkBuddy 5.5.6 完成用户级 GitHub 目录安装、已安装列表发现和三个新任务调用；ChatGPT 完成 GitHub Release 根部入口 ZIP 的账号技能导入，并在新对话中调用。实际回答存在来源编号改写和候选建议采用范围表述过宽的问题，不能报告全部行为通过。安装路径、原句和边界见[产品实测记录](product-trials-0.3.1.md)。
 
-0.3.1 移除了上传 ZIP 的独立许可证文件，一体版现为 22 个文件；该版本仅完成本地检查，未在 SkillHub 重测。运行指令与 0.3.0 相同，本次不新增行为试用结论。
+ClawHub、Claude、Codex、Claude Code 和 Cursor 仍未在本轮做账号导入或产品内运行测试。普通文本适配不应被报告为原生安装成功。
+
+0.3.1 移除了上传 ZIP 的独立许可证文件，一体版现为 22 个文件；未在 SkillHub 重测。运行指令与 0.3.0 相同，后续产品试用单独记录，不覆盖先前的独立代理试用。
