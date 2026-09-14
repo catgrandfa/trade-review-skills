@@ -1,8 +1,18 @@
 # Trade Review Skills
 
-Five portable AI skills for reviewing a trader's own reasoning, plans and execution against their own rules, with traceable evidence.
+Five portable AI skills and an optional unified entrypoint for reviewing a trader's own reasoning, plans and execution against their own rules, with traceable evidence.
 
 [中文](README.md) · [Downloads](https://github.com/catgrandfa/trade-review-skills/releases/latest) · [Installation](docs/installation.md) · [Compatibility](docs/compatibility.md)
+
+## One installation, five capabilities
+
+The [trade-review-suite](skills/trade-review-suite/SKILL.md) skill selects the relevant module for each request and includes all references locally. It does not require the five independent skills to be installed.
+
+- [trade-review-suite.zip](https://github.com/catgrandfa/trade-review-skills/releases/download/v0.3.0/trade-review-suite.zip): `SKILL.md` directly at the ZIP root, for uploaders that require a root entrypoint.
+- [trade-review-suite-folder.zip](https://github.com/catgrandfa/trade-review-skills/releases/download/v0.3.0/trade-review-suite-folder.zip): identical skill content wrapped in one `trade-review-suite/` folder, for folder-based importers.
+- The existing five ZIPs remain available for individual installation. `trade-review-skills-VERSION.zip` is a repository collection for extraction, not a single-skill upload.
+
+For local installation, add `--skill trade-review-suite` to the installer command below. The default still installs the five independent skills. Both suite ZIP layouts have local package checks; no SkillHub account upload or approval is claimed.
 
 ## Ask your AI to install
 
@@ -15,7 +25,7 @@ Preserve existing customized skills. Report the names, actual destination, and v
 If this environment only supports chat or temporary sandbox files, say so and follow the documented alternative; do not claim that reading Markdown is a native installation.
 ```
 
-The [AI installation entrypoint](INSTALL.md) covers complete skill folders, target selection, file verification, and chat-only fallback. Replace “all five skills” with “trade-plan-check” to install only that skill.
+The [AI installation entrypoint](INSTALL.md) covers complete skill folders, target selection, file verification, and chat-only fallback. Replace “all five skills” with “the unified trade-review-suite skill” for one entrypoint, or “trade-plan-check” for only that capability.
 
 ## Skills
 
@@ -56,6 +66,8 @@ python3 -m unittest discover -s tests -v
 git diff --check
 ```
 
-Common instructions are maintained in `shared/` and copied into each independent package. Text adapters and release assets are generated from the same sources.
+Common instructions are maintained in `shared/`. The suite's modules, templates and examples are generated from the five independent skills; only its routing entrypoint is maintained separately. Text adapters and release assets use the same sources.
+
+[Directory listing material](docs/catalog-listing.md) includes descriptions, use cases, dependencies, licensing, versioned downloads and validation evidence for SkillsMP discovery and SkillCast editorial review. Readiness is not a claim of acceptance or indexing.
 
 Licensed under [MIT](LICENSE). No private journal data or original third-party source materials are distributed. Not affiliated with any agent platform.

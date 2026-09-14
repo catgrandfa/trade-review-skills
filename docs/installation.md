@@ -1,6 +1,29 @@
 # 安装与开始使用
 
-下载 [GitHub Releases](https://github.com/catgrandfa/trade-review-skills/releases/latest) 中的单技能 ZIP，或克隆仓库。先选 `trade-plan-check` 即可，不必一次装五个。
+从 [GitHub Releases](https://github.com/catgrandfa/trade-review-skills/releases/latest) 选择对应版本的 ZIP，或克隆仓库。想一次安装全部功能选 `trade-review-suite`；想只试一项功能选 `trade-plan-check`。
+
+## 选择一体版或独立版
+
+一体版在平台中是一个技能，包含五个按任务读取的模块，不需要同时安装独立版。
+
+| 资产 | 解压结构 | 用法 |
+| --- | --- | --- |
+| `trade-review-suite.zip` | 根部直接为 `SKILL.md`、`modules/` 等 | 要求 ZIP 根部入口的上传器；SkillHub 提示缺入口时使用这一版排查 |
+| `trade-review-suite-folder.zip` | `trade-review-suite/SKILL.md` 及配套资源 | 要求单层技能目录的上传入口，例如 Claude 的文件夹式技能包 |
+| `trade-plan-check.zip` 等 | 每包一个独立技能目录 | 分别安装所需功能 |
+| `trade-review-skills-版本号.zip` | 仓库与多个技能目录 | 解压后分发，不作为单技能上传包 |
+
+两份一体版 ZIP 的文件内容相同，区别仅在外层目录。对应发行版从 0.3.0 开始提供；Release 尚未发布时使用本地 `dist/` 构建产物，不把旧版集合重命名为一体版。
+
+腾讯 SkillHub 地址为 [skillhub.cn/dashboard](https://skillhub.cn/dashboard)。本项目针对用户报告的缺少 `SKILL.md` 提示增加根部入口包，已验证包结构；尚未验证实际账号的上传、审核和安装。ClawHub 是另一个平台，其 MIT-0 发布规则不能套用到腾讯 SkillHub，见[分发调查](distribution-research.md)。
+
+本地安装一体版：
+
+```bash
+python3 scripts/install.py --target codex --skill trade-review-suite
+```
+
+将 `codex` 换成 `claude-code` 或 `cursor`，或按实际目标使用 `--dest`。不指定 `--skill` 的原命令仍安装五个独立技能。
 
 ## 复制给 AI 的指令
 
@@ -58,11 +81,11 @@ OpenAI 官方支持让安装器从其他仓库下载技能，见 [Build skills](
 
 ## Claude / Cowork
 
-1. 下载所需单技能 ZIP，例如 `trade-plan-check.zip`。
+1. 一次安装全部功能时下载 `trade-review-suite-folder.zip`；只装一项功能时选 `trade-plan-check.zip` 等独立包。
 2. 在 Customize → Skills 中选择创建/上传技能，上传 ZIP 并启用。组织账号需具备相应权限；按产品要求启用代码执行能力，尽管本套技能本身不运行代码。
 3. 用下面的虚构材料试用。其余四个包按需分别上传。
 
-每个 ZIP 只有一个顶层技能目录，目录下直接是 `SKILL.md` 与配套资源。不要把集合包当作单技能上传。Claude Code 的本地技能目录与 Claude/Cowork 账号技能属于不同安装入口。
+这里选择的 ZIP 只有一个顶层技能目录，目录下直接是 `SKILL.md` 与配套资源。一体版导入一次即可；五个独立版才需要分别上传。不要把集合包当作单技能上传。Claude Code 的本地技能目录与 Claude/Cowork 账号技能属于不同安装入口。
 
 ## WorkBuddy
 

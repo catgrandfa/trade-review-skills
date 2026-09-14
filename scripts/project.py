@@ -14,6 +14,11 @@ CATALOG = {
     "trade-scenario-plan": ("交易预案整理", "把已有判断整理成条件分支，保留原始依据、待定义项和草案状态"),
     "trade-rule-cards": ("心法转规则卡", "把经验整理成有场景、来源和采用状态的规则卡，供决策时核对"),
 }
+SUITE_NAME = "trade-review-suite"
+DISTRIBUTIONS = {
+    **CATALOG,
+    SUITE_NAME: ("交易决策复核一体版", "按任务调用计划核对、执行复盘、观点检查、预案整理与规则卡五个模块"),
+}
 LINK = re.compile(r"\[([^\]]+)\]\(([^)]+)\)")
 
 
@@ -38,16 +43,19 @@ def skill_files(skill: Path) -> list[Path]:
     if skill.is_symlink() or not skill.is_dir():
         raise ValueError(f"Not an ordinary skill directory: {skill}")
     result = []
+    resource_dirs = {"references", "templates"}
+    if skill.name == SUITE_NAME:
+        resource_dirs.add("modules")
     for path in sorted(skill.rglob("*")):
         if path.is_symlink():
             raise ValueError(f"Symlink not allowed in skill: {path}")
         if path.is_dir():
-            if path.relative_to(skill).as_posix() not in {"agents", "references", "templates"}:
+            if path.relative_to(skill).as_posix() not in resource_dirs | {"agents"}:
                 raise ValueError(f"Unexpected runtime directory: {path}")
             continue
         relative = path.relative_to(skill).as_posix()
         allowed = relative in {"SKILL.md", "LICENSE", "agents/openai.yaml"} or (
-            path.parent.name in {"references", "templates"} and path.suffix == ".md"
+            path.parent.name in resource_dirs and path.suffix == ".md"
             and len(path.relative_to(skill).parts) == 2
         )
         if not allowed:

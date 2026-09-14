@@ -13,7 +13,7 @@ sys.path.insert(0, str(ROOT / "scripts"))
 
 from build import build, generated_files, inline_links, release_files
 from install import install
-from project import CATALOG, LINK, check_local_links
+from project import CATALOG, DISTRIBUTIONS, LINK, SUITE_NAME, check_local_links, frontmatter
 from validate import validate, validate_skill
 
 
@@ -51,6 +51,59 @@ class DistributionTests(unittest.TestCase):
             digest, name = line.split("  ")
             self.assertEqual(digest, hashlib.sha256(first[ROOT / "dist" / name]).hexdigest())
 
+    def test_suite_zip_layouts_work_without_independent_skills(self) -> None:
+        from io import BytesIO
+        assets = release_files(ROOT)
+        for suffix, prefix in (("", ""), ("-folder", f"{SUITE_NAME}/")):
+            folder = self.base / ("flat" if not suffix else "wrapped") / SUITE_NAME
+            with zipfile.ZipFile(BytesIO(assets[ROOT / "dist" / f"{SUITE_NAME}{suffix}.zip"])) as archive:
+                self.assertEqual([n for n in archive.namelist() if n.endswith("SKILL.md")],
+                                 [prefix + "SKILL.md"])
+                self.assertEqual(len([n for n in archive.namelist() if n.startswith(prefix + "modules/")]), 5)
+                self.assertTrue(all(".." not in Path(n).parts and not Path(n).is_absolute()
+                                    for n in archive.namelist()))
+                archive.extractall(folder.parent if suffix else folder)
+            validate_skill(folder)
+            self.assertEqual({p.name for p in folder.parent.iterdir()}, {SUITE_NAME})
+            for name in CATALOG:
+                _, authored = frontmatter(ROOT / "skills" / name / "SKILL.md")
+                module = (folder / "modules" / f"{name}.md").read_text(encoding="utf-8")
+                self.assertEqual(inline_links(module.strip()), inline_links(authored))
+
+    def test_independent_edits_reach_suite_modules_templates_and_examples(self) -> None:
+        root = self.copy_project()
+        build(root)
+        skill = root / "skills/trade-plan-check"
+        changes = {
+            "SKILL.md": "modules/trade-plan-check.md",
+            "templates/plan-check.md": "templates/plan-check.md",
+            "references/examples.md": "references/trade-plan-check-examples.md",
+        }
+        for source, target in changes.items():
+            with (skill / source).open("a", encoding="utf-8") as stream:
+                stream.write(f"\n虚构构建校验：{source}。[约定]({'../' if '/' in source else ''}references/review-contract.md)\n")
+        with self.assertRaisesRegex(ValueError, "stale"):
+            build(root, check=True)
+        build(root)
+        validate(root)
+        with zipfile.ZipFile(root / "dist" / f"{SUITE_NAME}.zip") as archive:
+            for source, target in changes.items():
+                self.assertIn(f"虚构构建校验：{source}", archive.read(target).decode("utf-8"))
+
+    def test_suite_install_is_complete_and_preserves_customization(self) -> None:
+        dest = self.base / "suite-only"
+        messages = install(dest, [SUITE_NAME])
+        self.assertEqual(len(messages), 1)
+        self.assertEqual({p.name for p in dest.iterdir()}, {SUITE_NAME})
+        validate_skill(dest / SUITE_NAME)
+        self.assertTrue(install(dest, [SUITE_NAME])[0].startswith("Unchanged:"))
+        module = dest / SUITE_NAME / "modules/trade-plan-check.md"
+        module.write_text("synthetic customization\n", encoding="utf-8")
+        with self.assertRaisesRegex(ValueError, "differs"):
+            install(dest, ["trade-source-check", SUITE_NAME])
+        self.assertFalse((dest / "trade-source-check").exists())
+        self.assertEqual(module.read_text(encoding="utf-8"), "synthetic customization\n")
+
     def test_collection_links_survive_extraction(self) -> None:
         from io import BytesIO
         assets = release_files(ROOT)
@@ -84,9 +137,10 @@ class DistributionTests(unittest.TestCase):
             build(root, check=True)
         build(root)
         validate(root)
-        for name in CATALOG:
+        for name in DISTRIBUTIONS:
             with zipfile.ZipFile(root / "dist" / f"{name}.zip") as archive:
-                self.assertEqual(archive.read(f"{name}/references/author-experience.md"), source.read_bytes())
+                prefix = "" if name == SUITE_NAME else f"{name}/"
+                self.assertEqual(archive.read(f"{prefix}references/author-experience.md"), source.read_bytes())
         for path in (root / "adapters").rglob("*.md"):
             if path.name != "instructions.md":
                 self.assertIn(inline_links(updated.strip()), path.read_text(encoding="utf-8"))

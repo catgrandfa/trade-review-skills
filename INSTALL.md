@@ -14,6 +14,8 @@ skills/trade-rule-cards
 
 每个目录都包含入口、参考库、模板及许可证。不要只下载 `SKILL.md`，不要把整个仓库嵌套成一个 Skill，也不把仓库的 `AGENTS.md` 复制进使用者项目。
 
+使用者选择“一体版”“统一入口”或“一次上传全部功能”时，改为只安装 `skills/trade-review-suite` 这个完整目录；保留其 `modules/`、`references/`、`templates/`、`agents/` 和 `LICENSE`。它自带五项功能，无需同时安装另外五个技能。没有选择发行形态时沿用上面的五技能默认范围。
+
 ## 1. 确定当前工具与安装范围
 
 优先沿用使用者明确指定的工具和位置，否则根据当前运行环境选择；不要仅凭机器上存在某个目录就给所有工具安装。
@@ -52,7 +54,7 @@ python3 scripts/install.py --target claude-code
 python3 scripts/install.py --target cursor
 ```
 
-这三行是互斥的选择，不是要求顺序执行。只装一个时添加 `--skill trade-plan-check`；选择多个时重复 `--skill`。
+这三行是互斥的选择，不是要求顺序执行。选择一体版时添加 `--skill trade-review-suite`；只装一项功能时添加 `--skill trade-plan-check`；选择多个独立技能时重复 `--skill`。
 
 项目级安装使用 `--dest`，传入第 1 节确定的绝对目录。WorkBuddy 例如执行 `python3 scripts/install.py --dest "目标项目的绝对路径/.codebuddy/skills"`；该示例中的目标路径由实际项目位置替换，不照抄占位文字。
 
@@ -64,7 +66,7 @@ python3 scripts/install.py --target cursor
 
 安装脚本会检查入口、必需资源与内部链接。安装后，以同一目标和所选技能再次运行原命令并加上 `--dry-run`：每个技能都返回 `Unchanged`，才支持“与下载来源一致”。若出现 `Would install`、缺文件或冲突，检查尚未完成。
 
-使用内置安装器或手动复制时，也核对目标文件清单与来源逐字节一致。每个 Skill 至少应保留 `SKILL.md`、`references/`、`templates/`、`agents/openai.yaml` 和 `LICENSE`；`references/` 包含两份作者经验与来源文件。查漏时可用仓库安装脚本对目标运行 `--dry-run`。
+使用内置安装器或手动复制时，也核对目标文件清单与来源逐字节一致。每个 Skill 至少应保留 `SKILL.md`、`references/`、`templates/`、`agents/openai.yaml` 和 `LICENSE`；一体版还须完整保留 `modules/`。`references/` 包含两份作者经验与来源文件。查漏时可用仓库安装脚本对目标运行 `--dry-run`。
 
 文件检查与工具发现是两步：
 
@@ -79,6 +81,8 @@ Codex 可在下一轮查看技能列表，未出现时重启；Claude Code 新�
 ## 4. 没有原生安装能力时
 
 有上传入口但你不能操作时，准备[最新 Release](https://github.com/catgrandfa/trade-review-skills/releases/latest)中的五个单技能 ZIP，指出需要使用者导入的入口，状态写“已准备安装包，待导入”。不要把临时下载当成账号安装。
+
+若选择一体版，按入口要求准备 `trade-review-suite.zip`（根部直接有 `SKILL.md`）或 `trade-review-suite-folder.zip`（一层技能目录）。检查文件清单再上传，不使用 `trade-review-skills-版本号.zip` 集合。若所选版本的 Release 尚未包含这些资产，可从同版本 checkout 取得完整 `skills/trade-review-suite` 目录，按所需层级压缩；不要把本地生成说成已发布。
 
 只支持聊天或读取网页时，读取[完整单文件文本版](adapters/plain-chat/trade-review-suite.md)，或使用[原始文本地址](https://raw.githubusercontent.com/catgrandfa/trade-review-skills/main/adapters/plain-chat/trade-review-suite.md)。全文包含所有模块、共同约定、12 条经验、来源和模板，不需要递归追踪相对路径。确认完整读取后，可按它处理本轮材料；读取失败或内容不全时如实说明，提供文件上传入口，不假称已加载。
 

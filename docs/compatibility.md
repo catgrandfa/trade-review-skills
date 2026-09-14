@@ -2,6 +2,8 @@
 
 文档核验日期：2026-09-14。平台入口可能随版本、账号和管理员设置变化。
 
+0.3.0 新增统一入口版：`trade-review-suite.zip` 的根部直接包含 `SKILL.md`，`trade-review-suite-folder.zip` 则包含一层技能目录；两者内容相同。原有五个独立技能继续提供。下表的入口文档不等于新一体版已经在相应产品中通过安装测试。
+
 ## 支持范围
 
 | 平台 | 本项目提供 | 官方依据 | 本次验证边界 |
@@ -13,6 +15,8 @@
 | Claude Code | `~/.claude/skills` 目录安装 | [Skills 文档](https://code.claude.com/docs/en/skills) | 临时目录结构检查；未在 Claude Code 执行 |
 | Cursor | `~/.cursor/skills` 目录安装 | [Skills 文档](https://cursor.com/docs/skills) | 临时目录结构检查；未在 Cursor 执行 |
 | 其他 Agent | 标准技能文件夹或自包含纯文本 | [Agent Skills 规范](https://agentskills.io/specification) | 需要目标工具能够读取文本；不承诺自动发现 |
+
+腾讯 SkillHub 的[官方仓库](https://github.com/Tencent/skillhub)确认站点为 `skillhub.cn`。本次用户报告在 dashboard 上传 ZIP 提示缺少 `SKILL.md`，因此提供可供尝试的根部入口一体包；仅完成本地结构检查，未完成账号上传、审核或产品运行。未将其他腾讯云产品的 ZIP 规范当作 SkillHub 的官方契约。调查及证据边界见[分发调查](distribution-research.md)。
 
 “兼容”指提供符合已核对入口要求的材料与替代使用方式。结构校验、模型行为试用、真实平台安装是不同层次；没有做过的层次不标为通过。
 

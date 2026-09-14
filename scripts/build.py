@@ -4,15 +4,38 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import posixpath
 import zipfile
 from pathlib import Path
 
-from project import CATALOG, LINK, ROOT, frontmatter, skill_files
+from project import CATALOG, DISTRIBUTIONS, LINK, ROOT, SUITE_NAME, frontmatter, skill_files
 
 
 def inline_links(text: str) -> str:
     return LINK.sub(lambda m: m.group(0) if m.group(2).startswith(("http://", "https://", "#"))
                     else f"{m.group(1)}（内容已附在本文件中）", text)
+
+
+def suite_path(name: str, relative: str) -> str:
+    if relative == "SKILL.md":
+        return f"modules/{name}.md"
+    if relative == "references/examples.md":
+        return f"references/{name}-examples.md"
+    return relative
+
+
+def suite_links(text: str, name: str, source: str) -> str:
+    """Rebase authored links into the suite without changing module instructions."""
+    def replace(match: re.Match[str]) -> str:
+        label, target = match.groups()
+        if target.startswith(("https://", "http://", "#", "mailto:")):
+            return match.group(0)
+        path, separator, anchor = target.partition("#")
+        original = posixpath.normpath(posixpath.join(posixpath.dirname(source), path))
+        destination = suite_path(name, original)
+        relative = posixpath.relpath(destination, posixpath.dirname(suite_path(name, source)))
+        return f"[{label}]({relative}{separator}{anchor})"
+    return LINK.sub(replace, text)
 
 
 def generated_files(root: Path) -> dict[Path, bytes]:
@@ -24,7 +47,7 @@ def generated_files(root: Path) -> dict[Path, bytes]:
              "示例全部为虚构，不作为我的规则、持仓或操作。没有外部文件读取、行情或下单依赖。\n\n")
     common_text = "\n\n".join(inline_links(p.read_text(encoding="utf-8").strip()) for p in common)
     sections = []
-    for name, (title, description) in CATALOG.items():
+    for name, (title, description) in DISTRIBUTIONS.items():
         folder = root / "skills" / name
         for source in common:
             output[folder / "references" / source.name] = source.read_bytes()
@@ -33,15 +56,30 @@ def generated_files(root: Path) -> dict[Path, bytes]:
                     f'  short_description: "{description}"\n'
                     f'  default_prompt: "请用 ${name} 根据我提供的材料完成{title}。"\n')
         output[folder / "agents" / "openai.yaml"] = metadata.encode("utf-8")
+    suite_folder = root / "skills" / SUITE_NAME
+    for name in CATALOG:
+        folder = root / "skills" / name
         _, body = frontmatter(folder / "SKILL.md")
         extras = [folder / "references" / "examples.md", *sorted((folder / "templates").glob("*.md"))]
+        output[suite_folder / suite_path(name, "SKILL.md")] = (
+            suite_links(body, name, "SKILL.md") + "\n").encode("utf-8")
+        for source in extras:
+            relative = source.relative_to(folder).as_posix()
+            target = suite_folder / suite_path(name, relative)
+            if target in output:
+                raise ValueError(f"Colliding suite resource: {target}")
+            output[target] = suite_links(source.read_text(encoding="utf-8"), name, relative).encode("utf-8")
         section = inline_links(body) + "\n\n" + "\n\n".join(
             inline_links(p.read_text(encoding="utf-8").strip()) for p in extras)
         sections.append(section)
         output[root / "adapters" / "plain-chat" / f"{name}.md"] = (
             intro + common_text + "\n\n" + section + "\n").encode("utf-8")
-    routing = "## 选择模块\n\n" + "\n".join(f"- {name}：{v[0]}。" for name, v in CATALOG.items())
-    suite = intro + routing + "\n\n" + common_text + "\n\n" + "\n\n".join(sections) + "\n"
+    output[suite_folder / "references/examples.md"] = (
+        "# 虚构示例\n\n按当前任务选择示例，不把示例当作使用者的材料。\n\n" +
+        "\n".join(f"- [{title}]({name}-examples.md)" for name, (title, _) in CATALOG.items()) + "\n"
+    ).encode("utf-8")
+    _, routing = frontmatter(suite_folder / "SKILL.md")
+    suite = intro + inline_links(routing) + "\n\n" + common_text + "\n\n" + "\n\n".join(sections) + "\n"
     output[root / "adapters" / "plain-chat" / "trade-review-suite.md"] = suite.encode("utf-8")
     output[root / "adapters" / "chatgpt" / "knowledge.md"] = suite.encode("utf-8")
     return output
@@ -64,14 +102,21 @@ def release_files(root: Path) -> dict[Path, bytes]:
     version = (root / "VERSION").read_text(encoding="utf-8").strip()
     output = {}
     bundle = {}
-    for name in CATALOG:
+    for name in DISTRIBUTIONS:
         folder = root / "skills" / name
         files = {f"{name}/{p.relative_to(folder).as_posix()}": p.read_bytes() for p in skill_files(folder)}
-        output[root / "dist" / f"{name}.zip"] = zip_bytes(files)
+        if name == SUITE_NAME:
+            # Root-level SKILL.md for strict uploaders; folder variant for directory-based importers.
+            output[root / "dist" / f"{name}.zip"] = zip_bytes(
+                {p.relative_to(folder).as_posix(): p.read_bytes() for p in skill_files(folder)})
+            output[root / "dist" / f"{name}-folder.zip"] = zip_bytes(files)
+        else:
+            output[root / "dist" / f"{name}.zip"] = zip_bytes(files)
         bundle.update({f"trade-review-skills/skills/{path}": data for path, data in files.items()})
     # The collection ZIP is for extraction, never a single-skill upload.
     for rel in ("README.md", "README.en.md", "INSTALL.md", "LICENSE", "VERSION", "docs/installation.md",
-                "docs/compatibility.md", "docs/validation.md", "examples/walkthrough.md"):
+                "docs/compatibility.md", "docs/validation.md", "docs/distribution-research.md",
+                "docs/catalog-listing.md", "examples/walkthrough.md"):
         bundle[f"trade-review-skills/{rel}"] = (root / rel).read_bytes()
     for path in sorted((root / "adapters").rglob("*.md")):
         bundle[f"trade-review-skills/{path.relative_to(root).as_posix()}"] = path.read_bytes()
@@ -117,7 +162,7 @@ def main() -> None:
     parser.add_argument("--check", action="store_true", help="Check generated files without changing them")
     args = parser.parse_args()
     build(check=args.check)
-    print("Generated files and release assets are current." if args.check else "Built 5 standalone skills, text adapters and release assets in dist/.")
+    print("Generated files and release assets are current." if args.check else "Built 5 standalone skills, 1 unified suite, text adapters and release assets in dist/.")
 
 
 if __name__ == "__main__":

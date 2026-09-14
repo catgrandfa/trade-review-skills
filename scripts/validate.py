@@ -7,7 +7,7 @@ import zipfile
 from pathlib import Path
 
 from build import build
-from project import CATALOG, ROOT, check_local_links, frontmatter, skill_files
+from project import CATALOG, DISTRIBUTIONS, ROOT, SUITE_NAME, check_local_links, frontmatter, skill_files
 
 
 def validate_skill(folder: Path) -> None:
@@ -24,6 +24,8 @@ def validate_skill(folder: Path) -> None:
                 "references/author-experience.md", "references/author-sources.md",
                 "references/examples.md", "agents/openai.yaml"}
     files = skill_files(folder)
+    if name == SUITE_NAME:
+        required.update(f"modules/{module}.md" for module in CATALOG)
     if not required.issubset({p.relative_to(folder).as_posix() for p in files}):
         raise ValueError(f"Missing standalone resources: {folder}")
     for path in files:
@@ -32,9 +34,9 @@ def validate_skill(folder: Path) -> None:
 
 
 def validate(root: Path = ROOT) -> None:
-    if {p.name for p in (root / "skills").iterdir()} != set(CATALOG):
-        raise ValueError("Expected exactly the five catalogued skills")
-    for name in CATALOG:
+    if {p.name for p in (root / "skills").iterdir()} != set(DISTRIBUTIONS):
+        raise ValueError("Expected five independent skills and one unified suite")
+    for name in DISTRIBUTIONS:
         validate_skill(root / "skills" / name)
     build(root, check=True)
     for dirname in ("docs", "examples", "shared", "adapters", "evals"):
@@ -48,8 +50,14 @@ def validate(root: Path = ROOT) -> None:
                         for p in skill_files(root / "skills" / name)}
             if set(archive.namelist()) != expected or archive.testzip() is not None:
                 raise ValueError(f"Incorrect standalone ZIP: {name}")
+    folder = root / "skills" / SUITE_NAME
+    for filename, prefix in ((f"{SUITE_NAME}.zip", ""), (f"{SUITE_NAME}-folder.zip", f"{SUITE_NAME}/")):
+        with zipfile.ZipFile(root / "dist" / filename) as archive:
+            expected = {prefix + p.relative_to(folder).as_posix() for p in skill_files(folder)}
+            if set(archive.namelist()) != expected or archive.testzip() is not None:
+                raise ValueError(f"Incorrect suite ZIP: {filename}")
 
 
 if __name__ == "__main__":
     validate()
-    print("PASS: 5 standalone skills, local references, generated adapters, deterministic assets and checksums.")
+    print("PASS: 5 standalone skills, 1 unified suite, both suite ZIP layouts, local references, generated adapters and checksums.")

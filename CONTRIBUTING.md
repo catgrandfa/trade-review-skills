@@ -6,11 +6,13 @@
 
 ## 维护位置
 
-- `skills/*/SKILL.md`、专用模板及 `references/examples.md`：维护各技能的实际行为。
+- 五个独立技能的 `SKILL.md`、专用模板及 `references/examples.md`：维护各模块的实际行为。
+- `skills/trade-review-suite/SKILL.md`：只维护统一入口的任务选择和衔接；其 `modules/`、模板、示例及示例索引全部由构建生成，不手改。
 - `shared/`：共同约定与交接卡的唯一来源。技能目录中的同名文件由构建复制。
 - `adapters/chatgpt/instructions.md`：简短 Project 指令；其余聊天适配正文自动生成。
 - `scripts/`：离线打包、结构校验和本地安装。保持标准库实现。
 - `docs/compatibility.md`：官方来源、日期、验证层次。新平台需先核对官方文档。
+- `docs/catalog-listing.md`：可供目录收录使用的事实与证据。发布后核对公开下载链接；GitHub 发现标签需在仓库元数据中配置，不能用文档文字代替。收录状态只按实际结果更新。
 
 ## 检查
 
@@ -27,4 +29,4 @@ git diff --check
 
 更新 `VERSION` 与 `CHANGELOG.md`，生成并校验发布资产。检查暂存文件只含本项目公开内容，提交后推送。以 `v` 加版本号创建 GitHub Release，上传 `dist/SHA256SUMS` 列出的资产及该校验文件。
 
-每个单技能包只包含一个顶层目录。集合包供解压使用，不用于某个平台的单技能上传入口。未完成平台账号试跑时，兼容矩阵保留“未实测”。
+五个独立技能包各包含一个顶层目录。一体版生成两个资产：`trade-review-suite.zip` 根部直接含 `SKILL.md`；`trade-review-suite-folder.zip` 包一层同名技能目录。集合包供解压使用，不用于某个平台的单技能上传入口。未完成平台账号试跑时，兼容矩阵保留“未实测”。

@@ -2,9 +2,22 @@
 
 **把自己认可的交易规则，落实到每一次决策，并留下可以复盘的证据。**
 
-五个可独立安装的 AI Skill，帮助个人交易者理清想法、核对计划、检查观点、记录执行。使用者提供自己的规则和材料即可开始；无需行情接口、券商账户或 API Key。
+提供五个可独立安装的 AI Skill，以及一次安装即可使用五项功能的统一入口版，帮助个人交易者理清想法、核对计划、检查观点、记录执行。使用者提供自己的规则和材料即可开始；无需行情接口、券商账户或 API Key。
 
 [让 AI 安装](#直接让-ai-从仓库安装) · [下载安装包](https://github.com/catgrandfa/trade-review-skills/releases/latest) · [安装指南](docs/installation.md) · [完整演示](examples/walkthrough.md) · [验证与限制](docs/validation.md) · [English](README.en.md)
+
+## 一次安装全部功能
+
+选择 [trade-review-suite 一体版](skills/trade-review-suite/SKILL.md)，按任务调用计划核对、执行复盘、观点检查、预案整理与规则卡；使用者在平台中只安装一个技能。模块和参考材料都包含在包内。
+
+| 文件 | 用途 |
+| --- | --- |
+| [trade-review-suite.zip](https://github.com/catgrandfa/trade-review-skills/releases/download/v0.3.0/trade-review-suite.zip) | 一体版，ZIP 根部直接是 `SKILL.md`；用于要求根部入口的上传器，也用于排查 SkillHub 的缺少入口提示 |
+| [trade-review-suite-folder.zip](https://github.com/catgrandfa/trade-review-skills/releases/download/v0.3.0/trade-review-suite-folder.zip) | 相同内容，外包一层 `trade-review-suite/` 目录；用于要求单技能文件夹的上传入口 |
+| `trade-plan-check.zip` 等五个包 | 按需分别安装独立技能 |
+| `trade-review-skills-版本号.zip` | 仓库分发集合，解压后选择技能；不能直接当作一个技能上传 |
+
+本地安装一体版可执行 `python3 scripts/install.py --target codex --skill trade-review-suite`；其他工具见[安装指南](docs/installation.md)。五个独立版仍可使用，一体版无需同时安装它们。两种 ZIP 均已做本地结构校验，SkillHub 账号上传及审核仍待实际验证。
 
 ## 直接让 AI 从仓库安装
 
@@ -17,7 +30,7 @@
 完成后列出技能名称、实际位置和验证结果；如果只有聊天或临时沙箱能力，请明确说明，按文档提供可用方式，不要把读取文本说成已安装。
 ```
 
-只想先试一个，把“全部 5 个 Skill”改成“trade-plan-check”。[INSTALL.md](INSTALL.md) 是 AI 的安装入口，包含仓库获取、目标目录、完整资源复制、重复安装检查和聊天环境的替代方式。Codex 内置安装器专用指令及 WorkBuddy 项目安装指令见[安装指南](docs/installation.md#复制给-ai-的指令)。
+要一次安装全部功能，把“全部 5 个 Skill”改成“统一入口版 trade-review-suite”；只想试一项功能可改成“trade-plan-check”。[INSTALL.md](INSTALL.md) 是 AI 的安装入口，包含仓库获取、目标目录、完整资源复制、重复安装检查和聊天环境的替代方式。Codex 内置安装器专用指令及 WorkBuddy 项目安装指令见[安装指南](docs/installation.md#复制给-ai-的指令)。
 
 ## 先试一次
 
@@ -39,7 +52,7 @@
 | [trade-scenario-plan](skills/trade-scenario-plan/SKILL.md) · 交易预案整理 | 已有判断，需要整理条件分支 | 条件出现、未出现、失效时的预案草案 |
 | [trade-rule-cards](skills/trade-rule-cards/SKILL.md) · 心法转规则卡 | 想把经验变成临场可核对的提醒 | 场景、边界、来源及采用状态明确的规则卡 |
 
-这些是五个技能目录，不是五个自动运行的 Agent。可以单独用，也可以通过[上下文交接卡](shared/context-template.md)串联：经验与观点 → 规则 → 计划 → 操作记录 → 复盘。
+这五项功能可分别安装，也可通过一体版的统一入口选用；都不自动运行 Agent。需要衔接时保留[上下文交接卡](shared/context-template.md)中的证据、时间和采用状态：经验与观点 → 规则 → 计划 → 操作记录 → 复盘。
 
 ## 作者经验参考库
 
@@ -86,7 +99,9 @@ python3 -m unittest discover -s tests -v
 git diff --check
 ```
 
-`shared/` 是共同约定的唯一维护源。构建将其复制到每个技能包，保证单独安装时仍可读取；同时生成 `adapters/` 文本适配文件及 `dist/` 发布包。详见[贡献指南](CONTRIBUTING.md)。
+`shared/` 是共同约定的唯一维护源。一体版只单独维护任务选择入口，具体模块、模板和示例从五个独立技能生成；构建同时生成 `adapters/` 文本适配及 `dist/` 发布包。详见[贡献指南](CONTRIBUTING.md)。
+
+推荐到技能目录时，可使用[收录资料](docs/catalog-listing.md)：包含中英文简介、适用场景、依赖、授权、固定版本下载链接及验证证据。SkillsMP 自动索引与 SkillCast 编辑审核的结果分别核对，未将准备完成写成已经收录。
 
 ## 开源与来源
 

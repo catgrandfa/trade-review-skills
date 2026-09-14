@@ -6,14 +6,14 @@ import argparse
 import shutil
 from pathlib import Path
 
-from project import CATALOG, ROOT, skill_files
+from project import CATALOG, DISTRIBUTIONS, ROOT, skill_files
 from validate import validate_skill
 
 TARGETS = {"codex": ".agents/skills", "claude-code": ".claude/skills", "cursor": ".cursor/skills"}
 
 
 def install(destination: Path, names: list[str], dry_run: bool = False, root: Path = ROOT) -> list[str]:
-    if len(names) != len(set(names)) or not names or any(name not in CATALOG for name in names):
+    if len(names) != len(set(names)) or not names or any(name not in DISTRIBUTIONS for name in names):
         raise ValueError("Select unique skill names from the catalog")
     destination = destination.expanduser().absolute()
     if any(p.is_symlink() for p in (destination, *destination.parents)):
@@ -50,7 +50,8 @@ def main() -> None:
     destination = parser.add_mutually_exclusive_group(required=True)
     destination.add_argument("--target", choices=TARGETS, help="User-level skill directory")
     destination.add_argument("--dest", type=Path, help="Explicit skills directory, including project-local directories")
-    parser.add_argument("--skill", action="append", choices=CATALOG, help="Repeat to select; defaults to all five")
+    parser.add_argument("--skill", action="append", choices=DISTRIBUTIONS,
+                        help="Repeat to select; defaults to five independent skills; select trade-review-suite for one entry")
     parser.add_argument("--dry-run", action="store_true")
     args = parser.parse_args()
     path = args.dest if args.dest else Path.home() / TARGETS[args.target]
