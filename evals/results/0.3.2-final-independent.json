@@ -1,0 +1,99 @@
+{
+  "date": "2026-09-14",
+  "revision": "0.3.2 final refinement",
+  "method": "Six fresh isolated agents, one supplied synthetic case each, without expected answers or maintainer history. Bundled example files were available as normal runtime resources.",
+  "suite_zip_sha256": "f6c5dc9d2254597a3d6184038216e911f9f949c22ced4a90e303bc408673f129",
+  "cases": [
+    {
+      "id": "G01",
+      "skill": "trade-plan-check",
+      "title": "4320 开仓、4280 止损，想提损",
+      "input": "我黄金在4320开仓，以4280为止损，现在的行情我提损可以吗",
+      "skill_used": "trade-plan-check",
+      "answer": "仅凭开仓 4320、止损 4280，还不能判断现在是否适合提损；你没有提供现价和拟调整的位置，也没有实时行情可供核对。\n\n按你描述，已在 4320 开仓，以 4280 作为止损位置；提损还在讨论中。如果这是多单，开仓到原止损相差 40 个报价单位，但这不是金额亏损。金额风险还取决于具体产品、单位和仓位，4280 是否合理也尚未核对。\n\n根据作者经验，值得核对的是新止损依据是否与这笔交易的失效条件、原持仓管理计划相符。这只是经验参考，你尚未说明自己的提损规则，因此目前无法判断与原计划是否一致。上移止损也未必越过 4320；即使拟移到成本之上，也只能说如果按该价成交会产生相应价差，实际成交及扣除成本后的盈亏仍未知。\n\n你这笔是多单还是空单，现价和想提到的价位分别是多少？这次依据什么条件提损，原计划对提损又是怎么约定的？\n",
+      "read_record": [
+        "skills/trade-plan-check/SKILL.md",
+        "G01.txt",
+        "skills/trade-plan-check/references/review-contract.md",
+        "skills/trade-plan-check/references/author-experience.md",
+        "skills/trade-plan-check/templates/plan-check.md",
+        "skills/trade-plan-check/references/author-sources.md"
+      ]
+    },
+    {
+      "id": "G02",
+      "skill": "trade-execution-review",
+      "title": "4200 卖出等回补，后来涨到 4700",
+      "input": "黄金之前4000开仓，在4200觉得上涨够多了，卖了等接回来，但是没有接得回来，直接上4400，后面一路到4700附近了，我需要复盘一下",
+      "skill_used": "trade-execution-review",
+      "answer": "这次能确认的是，你在高于开仓价的位置卖出了持仓，但卖出后想接回的安排没有实现。后来涨到4700附近，不能单凭这个结果认定4200卖错了；关键还是当时为什么卖，以及准备怎样接回。\n\n按你这段描述：4000开仓，4200觉得“上涨够多了”而卖出，随后没有接回，行情先到4400，后来到4700附近。卖出的那部分没有参与后续上涨，但你还没说卖出比例，不能当成已经清仓，也不能计算整笔净收益。“上涨够多”的具体标准还没展开，回补条件也未知，所以目前还不能判断这是计划内接受的结果，还是执行偏离。\n\n最值得补的是当时的卖出与回补安排：“上涨够多”具体看什么、4200是否事先定好？卖出时准备在什么条件下接回，如果行情一直不回调，当时又打算怎么处理？这能帮助区分条件始终没出现、条件出现却没执行，以及后来才产生的新想法。\n",
+      "read_record": [
+        "skills/trade-execution-review/SKILL.md",
+        "G02.txt",
+        "skills/trade-execution-review/references/review-contract.md",
+        "skills/trade-execution-review/references/examples.md",
+        "skills/trade-execution-review/references/author-experience.md"
+      ]
+    },
+    {
+      "id": "G03",
+      "skill": "trade-source-check",
+      "title": "把有条件的黄金观点理解成现在可以买",
+      "input": "我看到一段黄金观点，练习原文S1：“如果1小时收盘站上4400，并且随后回踩不破4380，再观察向4500发展的可能；跌破4350则这一判断失效，确认前继续观察。”我理解成“现在4385就可以买，看到4500”。我只想检查有没有理解错。",
+      "skill_used": "trade-source-check",
+      "answer": "有理解偏差。你把 S1 的有条件观察，理解成了“4385 现在就可以买”，又把“向4500发展的可能”说成了确定的目标。\n\nS1 的顺序是：先“1小时收盘站上4400”，再“随后回踩不破4380”，之后才观察向4500发展的可能；“跌破4350”则这一判断失效，确认前继续观察。这些条件、先后顺序和失效说明都需要保留，即使条件出现，原文也没有直接给出买入指令。\n\n保留原意可以这样概括：“先等1小时收盘站上4400，随后回踩不破4380，再观察能否向4500发展；跌破4350则判断失效，确认前继续观察。”\n\n练习中的单个价格4385，无法说明此前是否完成了上述确认过程；你没有提供相应时段记录，所以条件是否已经出现仍未知。但仅就文字理解而言，S1 确实不能推出‘现在4385就可以买，看到4500’。\n",
+      "read_record": [
+        "skills/trade-source-check/SKILL.md",
+        "G03.txt",
+        "skills/trade-source-check/references/review-contract.md",
+        "skills/trade-source-check/references/examples.md"
+      ]
+    },
+    {
+      "id": "G04",
+      "skill": "trade-scenario-plan",
+      "title": "4385 观察，等待 4400 确认的条件预案",
+      "input": "黄金这段练习行情现在4385。我还没开仓，想等1小时收盘高于4400后重新核对开仓计划；如果确认前先跌破4350，就取消这次等待，其余时候继续观察。帮我整理成预案，我还没定仓位和入场后的止损。",
+      "skill_used": "trade-scenario-plan",
+      "answer": "这份预案草案等的是 **1 小时收盘高于 4400 后，重新核对开仓计划**；如果在该确认前先跌破 4350，就取消这次等待。按你给的虚构情节，你尚未开仓，4385 是练习报价。\n\n- **如果本次等待尚未取消，且 1 小时收盘高于 4400**，就重新核对开仓计划。这里安排的是复核，是否开仓仍由你复核后决定。\n- **如果在上述确认前先跌破 4350**，就取消这次等待。取消后是否重新启动，你尚未说明，暂留待决定。\n- **如果确认与取消条件都未出现**，就继续观察。即使盘中高于 4400，只要尚未出现要求的 1 小时收盘确认，也不能据此进入确认分支。\n\n**当前属于哪个分支还无法确定。** 单凭现价 4385，无法知道此前是否已有 1 小时收盘高于 4400，或是否在确认前先跌破过 4350，因此不能直接写成“确认尚未出现”或“继续等待”。\n\n待定义项集中保留：仓位、入场后的止损；具体黄金产品、报价单位、记录时间及等待的时间上限未提供。4350 是你给出的取消等待条件，不能直接作为入场后的止损。\n\n要标明当前分支，还需补一项记录：从这次等待开始，是否出现过上述收盘确认或确认前跌破 4350，分别发生在何时？\n",
+      "read_record": [
+        "skills/trade-scenario-plan/SKILL.md",
+        "G04.txt",
+        "skills/trade-scenario-plan/references/review-contract.md",
+        "skills/trade-scenario-plan/references/author-experience.md"
+      ]
+    },
+    {
+      "id": "G05",
+      "skill": "trade-rule-cards",
+      "title": "把回补落空的经验记成候选提醒",
+      "input": "黄金4000买入，4200觉得涨够多就卖，原想等回调接回，后来4400、4700都没接。我发现自己卖的时候只想了回调，没想不回调怎么办。帮我把这个经验做成规则卡，目前只是候选提醒，不是已经采用的纪律；我没有选固定回补价或仓位比例。",
+      "skill_used": "trade-rule-cards",
+      "answer": "**候选提醒：卖出前，也想一遍“接不回来怎么办”。**\n\n**什么时候用：**准备卖出、同时打算等回调接回时。按你这段虚构描述，你在4000买入，4200因“觉得涨够多”卖出，原想等回调接回，后来4400、4700都没接。你明确提炼的经验是：“卖的时候只想了回调，没想不回调怎么办。”\n\n**临场问题（AI 根据你的经验整理，仍属候选）：**\n- 如果卖出后一直不给预期的回调，接不回来这个结果，我能否接受？\n- 如果不回调，我准备继续等待、重新评估，还是暂不参与？哪些安排还没决定？这些是供你选择的分支，不是已经确定的动作。\n\n**状态与边界：**候选提醒，尚未采用为纪律；卡片版本 v1。固定回补价、仓位比例均为**未选择**，不补设数字。这张卡不要求必须接回，也不能用后来涨到4400、4700证明4200卖出错误，更不追溯认定当时违反了这张候选卡。来源是你本次提供的虚构经历与经验自述，上面两个问题是 AI 整理。\n\n后续遇到类似场景，可以记录卖出前是否想过“不回调”这一分支、实际出现后如何处理，观察这张提醒能否帮助你把安排说清楚；几次盈利或成功接回不足以证明它有效。\n",
+      "read_record": [
+        "skills/trade-rule-cards/SKILL.md",
+        "G05.txt",
+        "skills/trade-rule-cards/references/review-contract.md",
+        "skills/trade-rule-cards/references/examples.md",
+        "skills/trade-rule-cards/references/author-experience.md",
+        "skills/trade-rule-cards/references/author-sources.md"
+      ]
+    },
+    {
+      "id": "G06",
+      "skill": "trade-execution-review",
+      "title": "4400 减半、4700 附近退出，自评不错",
+      "input": "4000买入，4400看到上涨势头变弱，减仓1/2，准备在4200接回来，然后行情直上4700，然后又发现上涨势头变弱，全部出场，虽然没接回来，但是感觉这单做的不错，复盘总结一下",
+      "skill_used": "trade-review-suite",
+      "answer": "按你这段描述，这单有值得肯定的地方：4400减仓一半后，剩余仓位仍参与了后面的上涨。没在4200接回来，并不能单独说明减仓做错；你对这次操作感到满意，也不必因为没吃满行情就否定这部分收获。\n\n过程是：4000买入，4400因你判断上涨势头变弱而减半，准备4200回补但未接回；行情后来涨到4700，你再次判断势头变弱，随后全部出场。两次都用了“势头变弱”这个理由，具体信号是否相同、动作是否符合当时计划，还需要补充。4700是你报告的行情到达价，最终成交价、数量和费用未提供，因此不代算整笔收益；清仓也不自动代表4200回补计划已取消。\n\n根据作者经验，复盘要看当时的依据，不能只用后来继续涨来判定卖错，也要核对接不回来时的安排。这只是经验参考。可以把这笔最值得补记的内容放在两处：两次“势头变弱”各看到了什么，为什么一次减半、一次全退？当时对4200回补设了什么条件，若一直不给这个位置，准备怎样处理？补清这些，才能进一步判断哪些做法值得重复，而不只记住这次结果不错。\n",
+      "read_record": [
+        "skills/trade-review-suite/SKILL.md",
+        "G06.txt",
+        "skills/trade-review-suite/references/review-contract.md",
+        "skills/trade-review-suite/modules/trade-execution-review.md",
+        "skills/trade-review-suite/references/author-experience.md",
+        "skills/trade-review-suite/references/author-sources.md"
+      ]
+    }
+  ]
+}

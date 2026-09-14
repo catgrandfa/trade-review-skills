@@ -48,7 +48,7 @@
 
 这六案已通过已安装的一体版在 WorkBuddy、ChatGPT 分别运行；[实测记录](evals/results/0.3.1-gold-products.md)同时保留有用的输出和缺陷，没有把安装成功或答复完成当成全部通过。
 
-0.3.2 根据这些问题优化了答复方式和判断边界。[六案简明说明](examples/gold-cases-explained.md)展示最终应让使用者明白什么；[独立复测](evals/results/0.3.2-independent.md)保留新版实际输出，产品测试另行记录。
+0.3.2 根据这些问题优化了答复方式和判断边界。[六案简明说明](examples/gold-cases-explained.md)展示最终应让使用者明白什么；[独立复测](evals/results/0.3.2-independent.md)和[产品复测](evals/results/0.3.2-products.md)分别保留结果。产品运行仍可能漏掉约束，不能把安装成功或一次答对当成稳定可靠。
 
 ## 五个 Skill
 
