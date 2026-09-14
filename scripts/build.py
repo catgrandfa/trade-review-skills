@@ -116,7 +116,7 @@ def release_files(root: Path) -> dict[Path, bytes]:
     # The collection ZIP is for extraction, never a single-skill upload.
     for rel in ("README.md", "README.en.md", "INSTALL.md", "LICENSE", "VERSION", "docs/installation.md",
                 "docs/compatibility.md", "docs/validation.md", "docs/distribution-research.md",
-                "docs/catalog-listing.md", "examples/walkthrough.md"):
+                "docs/catalog-listing.md", "docs/skillhub-upload-check.md", "examples/walkthrough.md"):
         bundle[f"trade-review-skills/{rel}"] = (root / rel).read_bytes()
     for path in sorted((root / "adapters").rglob("*.md")):
         bundle[f"trade-review-skills/{path.relative_to(root).as_posix()}"] = path.read_bytes()

@@ -12,12 +12,12 @@
 
 | 文件 | 用途 |
 | --- | --- |
-| [trade-review-suite.zip](https://github.com/catgrandfa/trade-review-skills/releases/download/v0.3.0/trade-review-suite.zip) | 一体版，ZIP 根部直接是 `SKILL.md`；用于要求根部入口的上传器，也用于排查 SkillHub 的缺少入口提示 |
+| [trade-review-suite.zip](https://github.com/catgrandfa/trade-review-skills/releases/download/v0.3.0/trade-review-suite.zip) | 一体版，ZIP 根部直接是 `SKILL.md`；已在 Edge 中通过 SkillHub 上传页的文件识别 |
 | [trade-review-suite-folder.zip](https://github.com/catgrandfa/trade-review-skills/releases/download/v0.3.0/trade-review-suite-folder.zip) | 相同内容，外包一层 `trade-review-suite/` 目录；用于要求单技能文件夹的上传入口 |
 | `trade-plan-check.zip` 等五个包 | 按需分别安装独立技能 |
 | `trade-review-skills-版本号.zip` | 仓库分发集合，解压后选择技能；不能直接当作一个技能上传 |
 
-本地安装一体版可执行 `python3 scripts/install.py --target codex --skill trade-review-suite`；其他工具见[安装指南](docs/installation.md)。五个独立版仍可使用，一体版无需同时安装它们。两种 ZIP 均已做本地结构校验，SkillHub 账号上传及审核仍待实际验证。
+本地安装一体版可执行 `python3 scripts/install.py --target codex --skill trade-review-suite`；其他工具见[安装指南](docs/installation.md)。五个独立版仍可使用，一体版无需同时安装它们。两种 ZIP 均已做本地结构校验；2026-09-14 在 Edge 的 SkillHub 发布页选择根部入口 ZIP 后，页面识别了 23 个文件、`SKILL.md` 和描述。尚未提交审核或验证安装运行，见[上传实测记录](docs/skillhub-upload-check.md)。
 
 ## 直接让 AI 从仓库安装
 

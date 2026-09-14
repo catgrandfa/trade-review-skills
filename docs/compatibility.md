@@ -16,7 +16,7 @@
 | Cursor | `~/.cursor/skills` 目录安装 | [Skills 文档](https://cursor.com/docs/skills) | 临时目录结构检查；未在 Cursor 执行 |
 | 其他 Agent | 标准技能文件夹或自包含纯文本 | [Agent Skills 规范](https://agentskills.io/specification) | 需要目标工具能够读取文本；不承诺自动发现 |
 
-腾讯 SkillHub 的[官方仓库](https://github.com/Tencent/skillhub)确认站点为 `skillhub.cn`。本次用户报告在 dashboard 上传 ZIP 提示缺少 `SKILL.md`，因此提供可供尝试的根部入口一体包；仅完成本地结构检查，未完成账号上传、审核或产品运行。未将其他腾讯云产品的 ZIP 规范当作 SkillHub 的官方契约。调查及证据边界见[分发调查](distribution-research.md)。
+腾讯 SkillHub 的[官方仓库](https://github.com/Tencent/skillhub)确认站点为 `skillhub.cn`。2026-09-14 在 Edge 的真实发布页选择 v0.3.0 根部入口一体包后，页面识别了全部 23 个文件、`SKILL.md` 与描述，见[上传实测记录](skillhub-upload-check.md)。未提交审核或验证安装运行，文件夹版 ZIP 也未在此入口实测。此前用户报告的失败上传没有留存具体包和操作路径，不能将其根因直接断定为目录层级或不支持一体版。未将其他腾讯云产品的 ZIP 规范当作 SkillHub 的官方契约；历史调查见[分发调查](distribution-research.md)。
 
 “兼容”指提供符合已核对入口要求的材料与替代使用方式。结构校验、模型行为试用、真实平台安装是不同层次；没有做过的层次不标为通过。
 

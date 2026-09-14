@@ -32,4 +32,6 @@ git diff --check
 
 ## 产品验证
 
-平台入口的文档依据见[兼容矩阵](compatibility.md)。当前版本没有真实 SkillHub、ClawHub、ChatGPT、Claude、WorkBuddy、Codex、Claude Code 或 Cursor 账号导入与产品内运行的验证结论。普通文本适配不应被报告为原生安装成功。
+平台入口的文档依据见[兼容矩阵](compatibility.md)。2026-09-14 在 Edge 的 SkillHub 发布页验证了 v0.3.0 `trade-review-suite.zip`：页面识别 23 个文件、入口和描述，见[实测记录](skillhub-upload-check.md)。这仅证明该入口当时成功解析所选 ZIP，尚未提交审核或验证安装运行。
+
+当前版本仍没有 ClawHub、ChatGPT、Claude、WorkBuddy、Codex、Claude Code 或 Cursor 账号导入与产品内运行的验证结论。普通文本适配不应被报告为原生安装成功。
