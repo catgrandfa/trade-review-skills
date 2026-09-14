@@ -12,12 +12,12 @@
 
 | 文件 | 用途 |
 | --- | --- |
-| [trade-review-suite.zip](https://github.com/catgrandfa/trade-review-skills/releases/download/v0.3.1/trade-review-suite.zip) | 一体版，ZIP 根部直接是 `SKILL.md`，共 22 个文件，无独立 `LICENSE` 文件 |
-| [trade-review-suite-folder.zip](https://github.com/catgrandfa/trade-review-skills/releases/download/v0.3.1/trade-review-suite-folder.zip) | 相同内容，外包一层 `trade-review-suite/` 目录；用于要求单技能文件夹的上传入口 |
+| [trade-review-suite.zip](https://github.com/catgrandfa/trade-review-skills/releases/download/v0.3.2/trade-review-suite.zip) | 一体版，ZIP 根部直接是 `SKILL.md`，共 22 个文件，无独立 `LICENSE` 文件 |
+| [trade-review-suite-folder.zip](https://github.com/catgrandfa/trade-review-skills/releases/download/v0.3.2/trade-review-suite-folder.zip) | 相同内容，外包一层 `trade-review-suite/` 目录；用于要求单技能文件夹的上传入口 |
 | `trade-plan-check.zip` 等五个包 | 按需分别安装独立技能 |
 | `trade-review-skills-版本号.zip` | 仓库分发集合，解压后选择技能；不能直接当作一个技能上传 |
 
-本地安装一体版可执行 `python3 scripts/install.py --target codex --skill trade-review-suite`；其他工具见[安装指南](docs/installation.md)。五个独立版仍可使用，一体版无需同时安装它们。0.3.1 的七个上传 ZIP 均移除独立 `LICENSE` 文件并通过本地检查，技能内容与元数据保持原样。SkillHub 的[文件识别实测](docs/skillhub-upload-check.md)针对含 23 个文件的 0.3.0；新版尚未在 SkillHub 重测，不据此声称审核或安装运行通过。
+本地安装一体版可执行 `python3 scripts/install.py --target codex --skill trade-review-suite`；其他工具见[安装指南](docs/installation.md)。五个独立版仍可使用，一体版无需同时安装它们。0.3.2 的七个上传 ZIP 继续排除独立 `LICENSE` 文件；五个模块和共同约定已更新，MIT 元数据保留。SkillHub 的[文件识别实测](docs/skillhub-upload-check.md)针对含 23 个文件的 0.3.0；新版尚未在 SkillHub 重测，不据此声称审核或安装运行通过。
 
 0.3.1 已在 WorkBuddy 5.5.6 完成用户级安装与新任务调用，也已通过 ChatGPT 账号技能页导入 GitHub 发布 ZIP 并在新对话调用。[产品实测记录](docs/product-trials-0.3.1.md)保留全部测试范围和发现的两项行为缺陷，不把安装成功等同于所有回答通过。
 
@@ -47,6 +47,8 @@
 想用更接近日常提问的方式试用，可直接复制[六个黄金虚构案例](examples/gold-cases.md)：4320 开仓后的提损核对、4200 卖出后踏空复盘、观点理解检查、4400 确认预案、候选规则卡，以及减半后退出的复盘。五个子技能均有对应案例；黄金是真实品种，价格与情节全部虚构。
 
 这六案已通过已安装的一体版在 WorkBuddy、ChatGPT 分别运行；[实测记录](evals/results/0.3.1-gold-products.md)同时保留有用的输出和缺陷，没有把安装成功或答复完成当成全部通过。
+
+0.3.2 根据这些问题优化了答复方式和判断边界。[六案简明说明](examples/gold-cases-explained.md)展示最终应让使用者明白什么；[独立复测](evals/results/0.3.2-independent.md)保留新版实际输出，产品测试另行记录。
 
 ## 五个 Skill
 

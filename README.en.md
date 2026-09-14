@@ -8,11 +8,11 @@ Five portable AI skills and an optional unified entrypoint for reviewing a trade
 
 The [trade-review-suite](skills/trade-review-suite/SKILL.md) skill selects the relevant module for each request and includes all references locally. It does not require the five independent skills to be installed.
 
-- [trade-review-suite.zip](https://github.com/catgrandfa/trade-review-skills/releases/download/v0.3.1/trade-review-suite.zip): `SKILL.md` directly at the ZIP root, with 22 files and no standalone `LICENSE` file.
-- [trade-review-suite-folder.zip](https://github.com/catgrandfa/trade-review-skills/releases/download/v0.3.1/trade-review-suite-folder.zip): identical skill content wrapped in one `trade-review-suite/` folder, for folder-based importers.
+- [trade-review-suite.zip](https://github.com/catgrandfa/trade-review-skills/releases/download/v0.3.2/trade-review-suite.zip): `SKILL.md` directly at the ZIP root, with 22 files and no standalone `LICENSE` file.
+- [trade-review-suite-folder.zip](https://github.com/catgrandfa/trade-review-skills/releases/download/v0.3.2/trade-review-suite-folder.zip): identical skill content wrapped in one `trade-review-suite/` folder, for folder-based importers.
 - The existing five ZIPs remain available for individual installation. `trade-review-skills-VERSION.zip` is a repository collection for extraction, not a single-skill upload.
 
-For local installation, add `--skill trade-review-suite` to the installer command below. The default still installs the five independent skills. All seven upload ZIPs in 0.3.1 omit the standalone `LICENSE` file and pass local package checks; skill content and metadata remain unchanged. The [SkillHub upload check](docs/skillhub-upload-check.md) covered the 23-file 0.3.0 package. Version 0.3.1 has not been retested on the platform; approval and installation remain unverified.
+For local installation, add `--skill trade-review-suite` to the installer command below. The default still installs the five independent skills. All seven upload ZIPs in 0.3.2 continue to omit the standalone `LICENSE` file. The shared contract and five modules have been updated; MIT metadata is retained. The [SkillHub upload check](docs/skillhub-upload-check.md) covered the 23-file 0.3.0 package. Versions 0.3.1 and 0.3.2 have not been retested on SkillHub; approval and installation remain unverified.
 
 Version 0.3.1 has since been installed and invoked in new WorkBuddy 5.5.6 tasks, and imported from its GitHub release ZIP into ChatGPT's account skill directory for use in a new Work conversation. The [product trial report](docs/product-trials-0.3.1.md) records the exact scope and two behavioral defects; successful installation does not mean every answer passed review.
 

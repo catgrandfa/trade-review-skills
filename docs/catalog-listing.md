@@ -1,6 +1,6 @@
 # 目录收录资料
 
-核验日期：2026-09-14。对应版本：0.3.1。本页提供可供目录抓取、编辑核验与推荐投稿使用的材料，不表示已被收录或通过平台审核。
+核验日期：2026-09-14。对应版本：0.3.2。本页提供可供目录抓取、编辑核验与推荐投稿使用的材料，不表示已被收录或通过平台审核。
 
 ## 项目简介
 
@@ -25,13 +25,13 @@
 - 仓库：[catgrandfa/trade-review-skills](https://github.com/catgrandfa/trade-review-skills)
 - 统一入口：[skills/trade-review-suite/SKILL.md](../skills/trade-review-suite/SKILL.md)
 - 独立入口：[计划核对](../skills/trade-plan-check/SKILL.md)、[执行复盘](../skills/trade-execution-review/SKILL.md)、[观点检查](../skills/trade-source-check/SKILL.md)、[预案整理](../skills/trade-scenario-plan/SKILL.md)、[规则卡](../skills/trade-rule-cards/SKILL.md)
-- 固定版本：[v0.3.1 Release](https://github.com/catgrandfa/trade-review-skills/releases/tag/v0.3.1)
-- 根部入口 ZIP：[trade-review-suite.zip](https://github.com/catgrandfa/trade-review-skills/releases/download/v0.3.1/trade-review-suite.zip)
-- 文件夹入口 ZIP：[trade-review-suite-folder.zip](https://github.com/catgrandfa/trade-review-skills/releases/download/v0.3.1/trade-review-suite-folder.zip)
-- 校验和：[SHA256SUMS](https://github.com/catgrandfa/trade-review-skills/releases/download/v0.3.1/SHA256SUMS)
+- 固定版本：[v0.3.2 Release](https://github.com/catgrandfa/trade-review-skills/releases/tag/v0.3.2)
+- 根部入口 ZIP：[trade-review-suite.zip](https://github.com/catgrandfa/trade-review-skills/releases/download/v0.3.2/trade-review-suite.zip)
+- 文件夹入口 ZIP：[trade-review-suite-folder.zip](https://github.com/catgrandfa/trade-review-skills/releases/download/v0.3.2/trade-review-suite-folder.zip)
+- 校验和：[SHA256SUMS](https://github.com/catgrandfa/trade-review-skills/releases/download/v0.3.2/SHA256SUMS)
 - [安装说明](installation.md)、[完整虚构演示](../examples/walkthrough.md)、[验证范围](validation.md)
 
-统一入口 ZIP 根部直接包含一个 `SKILL.md`，五个模块和全部参考材料随包提供；文件夹版外包一层同名目录。独立技能各有自己的 `SKILL.md`、非空 `name` / `description` frontmatter 和完整资源。0.3.1 的七个技能上传 ZIP 不包含独立 `LICENSE` 文件，保留 MIT 元数据与完整技能资源。仓库集合 ZIP 保留源码许可证，用于解压分发，不用于单技能上传。
+统一入口 ZIP 根部直接包含一个 `SKILL.md`，五个模块和全部参考材料随包提供；文件夹版外包一层同名目录。独立技能各有自己的 `SKILL.md`、非空 `name` / `description` frontmatter 和完整资源。0.3.2 的七个技能上传 ZIP 不包含独立 `LICENSE` 文件，保留 MIT 元数据与完整技能资源。仓库集合 ZIP 保留源码许可证，用于解压分发，不用于单技能上传。
 
 ## SkillsMP：可发现性要求
 
