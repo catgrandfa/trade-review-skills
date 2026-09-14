@@ -16,6 +16,8 @@ For local installation, add `--skill trade-review-suite` to the installer comman
 
 Version 0.3.1 has since been installed and invoked in new WorkBuddy 5.5.6 tasks, and imported from its GitHub release ZIP into ChatGPT's account skill directory for use in a new Work conversation. The [product trial report](docs/product-trials-0.3.1.md) records the exact scope and two behavioral defects; successful installation does not mean every answer passed review.
 
+Version 0.3.2 improves plain-language answers and evidence boundaries, with six synthetic gold examples covering all five skills. See the [case explanations](examples/gold-cases-explained.md), [independent trials](evals/results/0.3.2-independent.md), and [actual product trials](evals/results/0.3.2-products.md). Product responses still sometimes overstate missing evidence; these results are not an all-pass compatibility or effectiveness claim.
+
 ## Ask your AI to install
 
 Paste this into your current agent:
