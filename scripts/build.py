@@ -119,7 +119,7 @@ def release_files(root: Path) -> dict[Path, bytes]:
     for rel in ("README.md", "README.en.md", "INSTALL.md", "LICENSE", "VERSION", "docs/installation.md",
                 "docs/compatibility.md", "docs/validation.md", "docs/distribution-research.md",
                 "docs/catalog-listing.md", "docs/skillhub-upload-check.md",
-                "docs/product-trials-0.3.1.md", "examples/walkthrough.md"):
+                "docs/product-trials-0.3.1.md", "examples/walkthrough.md", "examples/gold-cases.md"):
         bundle[f"trade-review-skills/{rel}"] = (root / rel).read_bytes()
     for path in sorted((root / "adapters").rglob("*.md")):
         bundle[f"trade-review-skills/{path.relative_to(root).as_posix()}"] = path.read_bytes()
