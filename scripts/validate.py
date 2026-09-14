@@ -10,7 +10,7 @@ from build import build
 from project import CATALOG, DISTRIBUTIONS, ROOT, SUITE_NAME, check_local_links, frontmatter, skill_files
 
 
-def validate_skill(folder: Path) -> None:
+def validate_skill(folder: Path, *, upload_package: bool = False) -> None:
     metadata, body = frontmatter(folder / "SKILL.md")
     name = metadata.get("name", "")
     if not re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", name) or len(name) > 64 or name != folder.name:
@@ -20,10 +20,15 @@ def validate_skill(folder: Path) -> None:
         raise ValueError(f"Invalid description: {folder}")
     if metadata.get("license") != "MIT" or not body or len(body.splitlines()) >= 500:
         raise ValueError(f"Invalid skill body/license: {folder}")
-    required = {"SKILL.md", "LICENSE", "references/review-contract.md", "references/context-template.md",
+    required = {"SKILL.md", "references/review-contract.md", "references/context-template.md",
                 "references/author-experience.md", "references/author-sources.md",
                 "references/examples.md", "agents/openai.yaml"}
     files = skill_files(folder)
+    if upload_package:
+        if any(p.name == "LICENSE" for p in files):
+            raise ValueError(f"Standalone LICENSE not allowed in upload package: {folder}")
+    else:
+        required.add("LICENSE")
     if name == SUITE_NAME:
         required.update(f"modules/{module}.md" for module in CATALOG)
     if not required.issubset({p.relative_to(folder).as_posix() for p in files}):
@@ -47,13 +52,14 @@ def validate(root: Path = ROOT) -> None:
     for name in CATALOG:
         with zipfile.ZipFile(root / "dist" / f"{name}.zip") as archive:
             expected = {f"{name}/{p.relative_to(root / 'skills' / name).as_posix()}"
-                        for p in skill_files(root / "skills" / name)}
+                        for p in skill_files(root / "skills" / name) if p.name != "LICENSE"}
             if set(archive.namelist()) != expected or archive.testzip() is not None:
                 raise ValueError(f"Incorrect standalone ZIP: {name}")
     folder = root / "skills" / SUITE_NAME
     for filename, prefix in ((f"{SUITE_NAME}.zip", ""), (f"{SUITE_NAME}-folder.zip", f"{SUITE_NAME}/")):
         with zipfile.ZipFile(root / "dist" / filename) as archive:
-            expected = {prefix + p.relative_to(folder).as_posix() for p in skill_files(folder)}
+            expected = {prefix + p.relative_to(folder).as_posix()
+                        for p in skill_files(folder) if p.name != "LICENSE"}
             if set(archive.namelist()) != expected or archive.testzip() is not None:
                 raise ValueError(f"Incorrect suite ZIP: {filename}")
 

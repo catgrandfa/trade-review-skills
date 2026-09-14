@@ -10,3 +10,4 @@ This is an open-source, Chinese-first collection of five portable decision-revie
 - Before publishing material changes to decision behavior, use an independent agent to exercise the affected skills on isolated synthetic cases. Keep the request blind to expected answers; review the actual output and record evidence honestly.
 - Keep platform support claims tied to official documentation and distinguish package checks, behavioral trials, and actual product installation tests. Never imply installation into a user's account without evidence.
 - Keep changes focused; version release notes and use explicit release assets. Never stage files outside this repository.
+- The seven skill upload ZIPs omit the standalone `LICENSE` file. Keep license metadata, repository licenses, source-collection licenses and local directory installation intact. Validate upload packages separately from source directories.

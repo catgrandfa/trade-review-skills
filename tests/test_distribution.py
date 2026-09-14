@@ -38,7 +38,7 @@ class DistributionTests(unittest.TestCase):
                 self.assertTrue(all(".." not in Path(n).parts and not Path(n).is_absolute() for n in names))
                 archive.extractall(self.base / name)
             folder = self.base / name / name
-            validate_skill(folder)
+            validate_skill(folder, upload_package=True)
             for source in (ROOT / "shared").glob("*.md"):
                 self.assertEqual((folder / "references" / source.name).read_bytes(), source.read_bytes())
 
@@ -50,6 +50,22 @@ class DistributionTests(unittest.TestCase):
         for line in sums:
             digest, name = line.split("  ")
             self.assertEqual(digest, hashlib.sha256(first[ROOT / "dist" / name]).hexdigest())
+
+    def test_upload_zips_omit_license_and_preserve_skill_content(self) -> None:
+        from io import BytesIO
+        assets = release_files(ROOT)
+        layouts = [(name, f"{name}.zip", f"{name}/") for name in CATALOG]
+        layouts.extend([(SUITE_NAME, f"{SUITE_NAME}.zip", ""),
+                        (SUITE_NAME, f"{SUITE_NAME}-folder.zip", f"{SUITE_NAME}/")])
+        for name, filename, prefix in layouts:
+            with self.subTest(archive=filename):
+                source = ROOT / "skills" / name
+                with zipfile.ZipFile(BytesIO(assets[ROOT / "dist" / filename])) as archive:
+                    self.assertFalse(any(Path(path).name == "LICENSE" for path in archive.namelist()))
+                    expected = {prefix + p.relative_to(source).as_posix(): p.read_bytes()
+                                for p in source.rglob("*") if p.is_file() and p.name != "LICENSE"}
+                    self.assertEqual({path: archive.read(path) for path in archive.namelist()}, expected)
+                self.assertEqual((source / "LICENSE").read_bytes(), (ROOT / "LICENSE").read_bytes())
 
     def test_suite_zip_layouts_work_without_independent_skills(self) -> None:
         from io import BytesIO
@@ -63,7 +79,7 @@ class DistributionTests(unittest.TestCase):
                 self.assertTrue(all(".." not in Path(n).parts and not Path(n).is_absolute()
                                     for n in archive.namelist()))
                 archive.extractall(folder.parent if suffix else folder)
-            validate_skill(folder)
+            validate_skill(folder, upload_package=True)
             self.assertEqual({p.name for p in folder.parent.iterdir()}, {SUITE_NAME})
             for name in CATALOG:
                 _, authored = frontmatter(ROOT / "skills" / name / "SKILL.md")

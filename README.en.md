@@ -8,11 +8,11 @@ Five portable AI skills and an optional unified entrypoint for reviewing a trade
 
 The [trade-review-suite](skills/trade-review-suite/SKILL.md) skill selects the relevant module for each request and includes all references locally. It does not require the five independent skills to be installed.
 
-- [trade-review-suite.zip](https://github.com/catgrandfa/trade-review-skills/releases/download/v0.3.0/trade-review-suite.zip): `SKILL.md` directly at the ZIP root, for uploaders that require a root entrypoint.
-- [trade-review-suite-folder.zip](https://github.com/catgrandfa/trade-review-skills/releases/download/v0.3.0/trade-review-suite-folder.zip): identical skill content wrapped in one `trade-review-suite/` folder, for folder-based importers.
+- [trade-review-suite.zip](https://github.com/catgrandfa/trade-review-skills/releases/download/v0.3.1/trade-review-suite.zip): `SKILL.md` directly at the ZIP root, with 22 files and no standalone `LICENSE` file.
+- [trade-review-suite-folder.zip](https://github.com/catgrandfa/trade-review-skills/releases/download/v0.3.1/trade-review-suite-folder.zip): identical skill content wrapped in one `trade-review-suite/` folder, for folder-based importers.
 - The existing five ZIPs remain available for individual installation. `trade-review-skills-VERSION.zip` is a repository collection for extraction, not a single-skill upload.
 
-For local installation, add `--skill trade-review-suite` to the installer command below. The default still installs the five independent skills. Both suite ZIP layouts have local package checks. On 2026-09-14, SkillHub's publish page in Edge recognized all 23 files, the root `SKILL.md` and its description from `trade-review-suite.zip`. Review submission and installation remain unverified; see the [upload check](docs/skillhub-upload-check.md).
+For local installation, add `--skill trade-review-suite` to the installer command below. The default still installs the five independent skills. All seven upload ZIPs in 0.3.1 omit the standalone `LICENSE` file and pass local package checks; skill content and metadata remain unchanged. The [SkillHub upload check](docs/skillhub-upload-check.md) covered the 23-file 0.3.0 package. Version 0.3.1 has not been retested on the platform; approval and installation remain unverified.
 
 ## Ask your AI to install
 

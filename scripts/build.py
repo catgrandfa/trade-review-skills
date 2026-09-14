@@ -105,13 +105,15 @@ def release_files(root: Path) -> dict[Path, bytes]:
     for name in DISTRIBUTIONS:
         folder = root / "skills" / name
         files = {f"{name}/{p.relative_to(folder).as_posix()}": p.read_bytes() for p in skill_files(folder)}
+        # Upload packages omit the standalone license; source distributions retain it.
+        upload_files = {path: data for path, data in files.items() if path != f"{name}/LICENSE"}
         if name == SUITE_NAME:
             # Root-level SKILL.md for strict uploaders; folder variant for directory-based importers.
             output[root / "dist" / f"{name}.zip"] = zip_bytes(
-                {p.relative_to(folder).as_posix(): p.read_bytes() for p in skill_files(folder)})
-            output[root / "dist" / f"{name}-folder.zip"] = zip_bytes(files)
+                {path.removeprefix(f"{name}/"): data for path, data in upload_files.items()})
+            output[root / "dist" / f"{name}-folder.zip"] = zip_bytes(upload_files)
         else:
-            output[root / "dist" / f"{name}.zip"] = zip_bytes(files)
+            output[root / "dist" / f"{name}.zip"] = zip_bytes(upload_files)
         bundle.update({f"trade-review-skills/skills/{path}": data for path, data in files.items()})
     # The collection ZIP is for extraction, never a single-skill upload.
     for rel in ("README.md", "README.en.md", "INSTALL.md", "LICENSE", "VERSION", "docs/installation.md",
