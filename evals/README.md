@@ -1,5 +1,7 @@
 # 行为试用方法
 
+规则卡与复盘记录分离使用 [separate-deliverables-cases.json](separate-deliverables-cases.json)：同一虚构案例先保存两种交付，再仅修改规则卡，检查复盘文件是否保持原样。见[实际输出与文件核对](results/0.3.5-separate-deliverables.md)。
+
 稳定规则 ID 和内容版本使用 [rule-identity-cases.json](rule-identity-cases.json)，覆盖旧卡重看、候选修订、采用新版及避开已撤销编号；实际输入和输出见[本轮记录](results/0.3.4-rule-identity.md)。
 
 制卡前确认和固定简短模板见 [card-confirmation-cases.json](card-confirmation-cases.json)：逐轮检查含糊表述、内容确认、采用范围，以及用户拒绝定义后按明确原话制卡。[实际输出与局限](results/0.3.4-card-confirmation.md)单独记录，不覆盖此前快照。

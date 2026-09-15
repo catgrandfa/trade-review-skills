@@ -12,13 +12,15 @@
 
 第一次想知道会得到什么，可以看[从观点、预案到执行复盘的完整演示](skills/trade-review-suite/references/walkthrough.md)：每一段都有可复制输入和示范答复。已有材料就直接开始，只有遇到用法问题时才需要查[FAQ](shared/faq.md)。
 
-当前版本 **0.3.4**：交易评价先收集材料，等用户明确结束补充再总结；规则卡先确认关键含义，用简短模板交付，并固定 ID 与内容版本。一体版继续只保留 `trade-review-suite.zip`。
+当前版本 **0.3.5**：规则卡与复盘记录分开交付。规则卡简短并保留固定 ID 和版本；复盘保留交易经过、当时理由和核对结果，缩短卡片不改动复盘记录。一体版继续只保留 `trade-review-suite.zip`。
 
 材料收集阶段的[四组九轮试用](evals/results/0.3.4-intake.md)检查了补充期间暂不评价、用户结束后有限总结，以及新记录出现后重新收集；结果与局限单独记录。
 
 此前 0.3.3 的[六案独立试用](evals/results/0.3.3-first-use.md)保留实际答复和局限：当轮未发现事实或路由错误，部分答复仍略长，尚不能据此声称各平台都稳定简洁。
 
-发布包的[规则 ID 与版本试用](evals/results/0.3.4-rule-identity.md)覆盖重看、修订、采用与新建编号；其他试用按各自阶段快照记录，未全量重跑。
+此前 0.3.4 的[规则 ID 与版本试用](evals/results/0.3.4-rule-identity.md)覆盖重看、修订、采用与新建编号；其他试用按各自阶段快照记录，未全量重跑。
+
+本版的[独立文件试用](evals/results/0.3.5-separate-deliverables.md)核对了分别保存与仅修改规则卡后的复盘文件，结果与限制单独记录。
 
 ## 一次安装全部功能
 
@@ -26,11 +28,11 @@
 
 | 文件 | 用途 |
 | --- | --- |
-| [trade-review-suite.zip](https://github.com/catgrandfa/trade-review-skills/releases/download/v0.3.4/trade-review-suite.zip) | 一体版，ZIP 根部直接是 `SKILL.md`，共 29 个文件，无独立 `LICENSE` 文件 |
+| [trade-review-suite.zip](https://github.com/catgrandfa/trade-review-skills/releases/download/v0.3.5/trade-review-suite.zip) | 一体版，ZIP 根部直接是 `SKILL.md`，共 29 个文件，无独立 `LICENSE` 文件 |
 | `trade-plan-check.zip` 等五个包 | 按需分别安装独立技能 |
 | `trade-review-skills-版本号.zip` | 仓库分发集合，解压后选择技能；不能直接当作一个技能上传 |
 
-本地安装一体版可执行 `python3 scripts/install.py --target codex --skill trade-review-suite`；其他工具见[安装指南](docs/installation.md)。五个独立版仍可使用，一体版无需同时安装它们。0.3.4 的六个上传 ZIP 继续排除独立 `LICENSE` 文件；五个模块和共同约定已更新，MIT 元数据保留。SkillHub 的[文件识别实测](docs/skillhub-upload-check.md)针对含 23 个文件的 0.3.0；新版尚未在 SkillHub 重测，不据此声称审核或安装运行通过。
+本地安装一体版可执行 `python3 scripts/install.py --target codex --skill trade-review-suite`；其他工具见[安装指南](docs/installation.md)。五个独立版仍可使用，一体版无需同时安装它们。0.3.5 的六个上传 ZIP 继续排除独立 `LICENSE` 文件；五个模块和共同约定已更新，MIT 元数据保留。SkillHub 的[文件识别实测](docs/skillhub-upload-check.md)针对含 23 个文件的 0.3.0；新版尚未在 SkillHub 重测，不据此声称审核或安装运行通过。
 
 0.3.1 已在 WorkBuddy 5.5.6 完成用户级安装与新任务调用，也已通过 ChatGPT 账号技能页导入 GitHub 发布 ZIP 并在新对话调用。[产品实测记录](docs/product-trials-0.3.1.md)保留全部测试范围和发现的两项行为缺陷，不把安装成功等同于所有回答通过。
 

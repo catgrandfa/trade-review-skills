@@ -8,7 +8,7 @@
 
 | 资产 | 解压结构 | 用法 |
 | --- | --- | --- |
-| `trade-review-suite.zip` | 根部直接为 `SKILL.md`、`modules/` 等，0.3.4 共 29 个文件 | 供要求 ZIP 根部入口的上传器使用；无独立 `LICENSE` 文件 |
+| `trade-review-suite.zip` | 根部直接为 `SKILL.md`、`modules/` 等，0.3.5 共 29 个文件 | 供要求 ZIP 根部入口的上传器使用；无独立 `LICENSE` 文件 |
 | `trade-plan-check.zip` 等 | 每包一个独立技能目录 | 分别安装所需功能 |
 | `trade-review-skills-版本号.zip` | 仓库与多个技能目录 | 解压后分发，不作为单技能上传包 |
 
@@ -16,13 +16,13 @@
 
 当前五个独立技能 ZIP 和唯一的一体版 ZIP 均不包含独立 `LICENSE` 文件，`license: MIT` 元数据保留。仓库、源码集合及本地目录安装仍保留许可证；源码集合不用于平台上传。
 
-腾讯 SkillHub 地址为 [skillhub.cn/dashboard](https://skillhub.cn/dashboard)。2026-09-14 已在 Edge 的真实发布页验证 0.3.0 根部入口包的文件识别，0.3.1–0.3.4 尚未在此入口重测；未由此次测试提交审核或验证安装运行。ClawHub 是另一个平台，其 MIT-0 发布规则不能套用到腾讯 SkillHub，见[分发调查](distribution-research.md)。
+腾讯 SkillHub 地址为 [skillhub.cn/dashboard](https://skillhub.cn/dashboard)。2026-09-14 已在 Edge 的真实发布页验证 0.3.0 根部入口包的文件识别，0.3.1–0.3.5 尚未在此入口重测；未由此次测试提交审核或验证安装运行。ClawHub 是另一个平台，其 MIT-0 发布规则不能套用到腾讯 SkillHub，见[分发调查](distribution-research.md)。
 
 ### SkillHub 上传
 
-1. 下载 v0.3.4 的 [trade-review-suite.zip](https://github.com/catgrandfa/trade-review-skills/releases/download/v0.3.4/trade-review-suite.zip)，确认文件名；无需重新压缩。
+1. 下载 v0.3.5 的 [trade-review-suite.zip](https://github.com/catgrandfa/trade-review-skills/releases/download/v0.3.5/trade-review-suite.zip)，确认文件名；无需重新压缩。
 2. 在“发布 Skill”中选择普通发布，进入“本地上传”，点击“选择 zip 文件”，选择这份 ZIP。
-3. 等待页面解析并核对文件列表：0.3.4 应有 29 个文件，包含 `SKILL.md（必需）`，没有 `LICENSE`。出现从入口提取的描述建议才说明页面读到了入口。旧版 0.3.0 的实测是 23 个文件，其中包括此次移除的 `LICENSE`。
+3. 等待页面解析并核对文件列表：0.3.5 应有 29 个文件，包含 `SKILL.md（必需）`，没有 `LICENSE`。出现从入口提取的描述建议才说明页面读到了入口。旧版 0.3.0 的实测是 23 个文件，其中包括此次移除的 `LICENSE`。
 4. 之后再填写 Slug、显示名称、描述、版本号等发布信息。文件识别、提交审核、审核通过和安装运行分别确认。
 
 旧版[实测记录](skillhub-upload-check.md)包含当时的 SHA-256；新版以对应 Release 的 `SHA256SUMS` 为准。若仍报缺少 `SKILL.md`，先核对确切版本、文件名和校验和；旧版成功不能直接解释此前未留存的失败上传。不要上传仓库集合 ZIP；也不要仅上传入口 `SKILL.md`，因为它还引用包内模块、参考和模板。
