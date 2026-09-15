@@ -1,0 +1,62 @@
+{
+  "version": "0.3.4",
+  "date": "2026-09-15",
+  "method": "两名全新独立代理，不继承维护者对话，各自在隔离上传包中仅接收虚构用户输入。Q01 后续消息逐轮交付，第二轮补充针对实际追问组织；不提供预期答案。",
+  "cases": [
+    {
+      "id": "Q01",
+      "skill": "trade-rule-cards",
+      "zip_sha256": "613d78b02622defc125ac0b833f8dad97e5aa07a8dada0b8bc9ab276c36e5aca",
+      "snapshot": "制卡前确认与四项简短模板；稳定 ID 与内容版本修订前",
+      "matches_final_build": false,
+      "turns": [
+        {
+          "turn": 1,
+          "input": "这是虚构练习。我想把“连续两笔偏离计划就停一下”整理成自己的规则卡。先放候选，不采用。",
+          "response": "先保留为**候选，未采用**。成卡前有三处需要你说清，避免我替你定含义：\n\n1. “偏离计划”具体指哪些行为？\n2. “连续两笔”只看当天，还是跨天也算？\n3. “停一下”是暂停新开仓、暂停看盘，还是其他动作？\n\n这些是在确认原意，不代表你采用这条规则。",
+          "read_files": [
+            "trade-rule-cards/SKILL.md",
+            "trade-rule-cards/references/review-contract.md",
+            "trade-rule-cards/templates/rule-card.md"
+          ],
+          "characters_including_markdown": 127
+        },
+        {
+          "turn": 2,
+          "input": "偏离计划指没满足事先写好的开仓条件就开仓；只数当天连续两笔。停一下是当天不再新开仓，已有仓位继续按原计划处理。只记候选。",
+          "response": "### 当天连续两笔偏离开仓计划，就停止新开仓\n\n**什么时候用：**当天连续两笔都在未满足事先写好的开仓条件时开仓。\n\n**一句提醒：**触发后，当天不再新开仓；已有仓位继续按原计划处理。\n\n**问自己：**\n\n- 当天是否已连续两笔在开仓条件未满足时开仓？\n- 触发后，我是否又新开了仓？\n\n**状态与来源：**候选，未采用。依据你在这次虚构练习中确认的条件与动作；核对问题由 AI 整理。",
+          "read_files": [],
+          "characters_including_markdown": 197
+        },
+        {
+          "turn": 3,
+          "input": "就用这张卡，从下一次练习开始采用，只用于模拟练习。",
+          "response": "### 当天连续两笔偏离开仓计划，就停止新开仓\n\n**什么时候用：**模拟练习中，当天连续两笔都在未满足事先写好的开仓条件时开仓。\n\n**一句提醒：**触发后，当天不再新开仓；已有仓位继续按原计划处理。\n\n**问自己：**\n\n- 当天是否已连续两笔在开仓条件未满足时开仓？\n- 触发后，我是否又新开了仓？\n\n**状态与来源：**本人已采用，v1；从下一次练习开始生效，仅用于模拟练习。条件与动作来自你的确认，核对问题由 AI 整理。",
+          "read_files": [],
+          "characters_including_markdown": 216
+        }
+      ]
+    },
+    {
+      "id": "Q02",
+      "skill": "trade-review-suite",
+      "zip_sha256": "c87c4cf6b2f22431247984830fded1870d13a9faa6c5ca2091e0adf6f0e787e8",
+      "snapshot": "制卡前确认与四项简短模板；稳定 ID 与内容版本修订前",
+      "matches_final_build": false,
+      "turns": [
+        {
+          "turn": 1,
+          "input": "虚构练习。我之前写过“看到分歧时先慢一点”，你问慢一点是等十分钟还是等某个信号。我目前不想定义，也没有选这两种做法。只把“看到分歧时，先检查原依据是否仍成立”做成候选小卡，适用于我准备修改练习计划时。不要整理整笔交易，也先不采用。",
+          "response": "### 看到分歧时，先检查原依据是否仍成立\n\n**什么时候用：**准备修改练习计划时。\n\n**问自己：**看到分歧后，我原先制定这份计划的依据是否仍成立？\n\n**状态与来源：**候选，尚未采用。提醒和适用场景来自你本次的明确表述；问题由 AI 按原意整理。",
+          "read_files": [
+            "SKILL.md",
+            "references/review-contract.md",
+            "modules/trade-rule-cards.md",
+            "templates/rule-card.md"
+          ],
+          "characters_including_markdown": 128
+        }
+      ]
+    }
+  ]
+}

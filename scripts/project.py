@@ -20,12 +20,12 @@ DISTRIBUTIONS = {
     SUITE_NAME: ("交易决策复核一体版", "按任务调用计划核对、执行复盘、观点检查、预案整理与规则卡五个模块"),
 }
 DEFAULT_PROMPTS = {
-    "trade-plan-check": "核对我准备做的这一步与原计划是否一致，先说关键差异和缺项",
-    "trade-execution-review": "复盘我已经做过的操作，分清执行情况和盈亏结果",
+    "trade-plan-check": "帮我核对这次打算，先收集背景，等我补充完再总结",
+    "trade-execution-review": "帮我复盘这次操作，先补清当时的情况，等我补充完再评价",
     "trade-source-check": "对照我提供的原文，看看我的理解有没有遗漏条件",
     "trade-scenario-plan": "把我给的条件和打算整理成预案，没决定的地方留待定",
     "trade-rule-cards": "把我提供的经验做成提醒卡，保留来源和是否采用的状态",
-    SUITE_NAME: "根据我描述的事情选择需要的功能，先说能确定的结论和关键缺项",
+    SUITE_NAME: "按我描述的任务处理；评价交易前先收集材料，等我补充完再总结",
 }
 LINK = re.compile(r"\[([^\]]+)\]\(([^)]+)\)")
 

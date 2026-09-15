@@ -12,9 +12,13 @@
 
 第一次想知道会得到什么，可以看[从观点、预案到执行复盘的完整演示](skills/trade-review-suite/references/walkthrough.md)：每一段都有可复制输入和示范答复。已有材料就直接开始，只有遇到用法问题时才需要查[FAQ](shared/faq.md)。
 
-当前版本为 **0.3.3**：新增 FAQ 和随包示范，一体版只提供 `trade-review-suite.zip`，共 29 个文件。历史产品测试不代表已验证 0.3.3。
+当前版本 **0.3.4**：交易评价先收集材料，等用户明确结束补充再总结；规则卡先确认关键含义，用简短模板交付，并固定 ID 与内容版本。一体版继续只保留 `trade-review-suite.zip`。
 
-[六案独立试用](evals/results/0.3.3-first-use.md)保留实际答复和局限：本轮未发现事实或路由错误，部分答复仍略长，尚不能据此声称各平台都稳定简洁。
+材料收集阶段的[四组九轮试用](evals/results/0.3.4-intake.md)检查了补充期间暂不评价、用户结束后有限总结，以及新记录出现后重新收集；结果与局限单独记录。
+
+此前 0.3.3 的[六案独立试用](evals/results/0.3.3-first-use.md)保留实际答复和局限：当轮未发现事实或路由错误，部分答复仍略长，尚不能据此声称各平台都稳定简洁。
+
+发布包的[规则 ID 与版本试用](evals/results/0.3.4-rule-identity.md)覆盖重看、修订、采用与新建编号；其他试用按各自阶段快照记录，未全量重跑。
 
 ## 一次安装全部功能
 
@@ -22,11 +26,11 @@
 
 | 文件 | 用途 |
 | --- | --- |
-| [trade-review-suite.zip](https://github.com/catgrandfa/trade-review-skills/releases/download/v0.3.3/trade-review-suite.zip) | 一体版，ZIP 根部直接是 `SKILL.md`，共 29 个文件，无独立 `LICENSE` 文件 |
+| [trade-review-suite.zip](https://github.com/catgrandfa/trade-review-skills/releases/download/v0.3.4/trade-review-suite.zip) | 一体版，ZIP 根部直接是 `SKILL.md`，共 29 个文件，无独立 `LICENSE` 文件 |
 | `trade-plan-check.zip` 等五个包 | 按需分别安装独立技能 |
 | `trade-review-skills-版本号.zip` | 仓库分发集合，解压后选择技能；不能直接当作一个技能上传 |
 
-本地安装一体版可执行 `python3 scripts/install.py --target codex --skill trade-review-suite`；其他工具见[安装指南](docs/installation.md)。五个独立版仍可使用，一体版无需同时安装它们。0.3.3 的六个上传 ZIP 继续排除独立 `LICENSE` 文件；五个模块和共同约定已更新，MIT 元数据保留。SkillHub 的[文件识别实测](docs/skillhub-upload-check.md)针对含 23 个文件的 0.3.0；新版尚未在 SkillHub 重测，不据此声称审核或安装运行通过。
+本地安装一体版可执行 `python3 scripts/install.py --target codex --skill trade-review-suite`；其他工具见[安装指南](docs/installation.md)。五个独立版仍可使用，一体版无需同时安装它们。0.3.4 的六个上传 ZIP 继续排除独立 `LICENSE` 文件；五个模块和共同约定已更新，MIT 元数据保留。SkillHub 的[文件识别实测](docs/skillhub-upload-check.md)针对含 23 个文件的 0.3.0；新版尚未在 SkillHub 重测，不据此声称审核或安装运行通过。
 
 0.3.1 已在 WorkBuddy 5.5.6 完成用户级安装与新任务调用，也已通过 ChatGPT 账号技能页导入 GitHub 发布 ZIP 并在新对话调用。[产品实测记录](docs/product-trials-0.3.1.md)保留全部测试范围和发现的两项行为缺陷，不把安装成功等同于所有回答通过。
 
@@ -49,7 +53,7 @@
 
 > 帮我做开单前计划核对。我的计划是等回调，但现在一直涨，我怕错过，想先买一点，止损还没想好。这些是我的自述，尚未提供行情数据。
 
-它应指出：回调条件及当前是否满足仍待核对，不能直接断定已经改变计划；失效条件、仓位和风险安排缺失；“怕错过”是本人自述。没有提供个人纪律，就不能宣判违反纪律，也不会给出“可以买”的批准。
+它应先整理你的打算，优先问回调怎样定义、当前是否满足等关键背景；暂不评价计划是否合理或违规。你可以继续补充，明确说“补充完了”或“就按现有材料核对”后，它才总结仍有哪些未知和有依据的发现，也不会给出“可以买”的批准。
 
 你可以只安装第一个 Skill。普通聊天工具也能直接使用[单文件文本版](adapters/plain-chat/trade-plan-check.md)：把全文贴入对话，随后提供你的材料。
 
@@ -67,11 +71,13 @@
 | [trade-execution-review](skills/trade-execution-review/SKILL.md) · 交易行为复盘 | “我卖飞了，帮我复盘这次操作” | 事前计划、实际执行、结果分开评价 |
 | [trade-source-check](skills/trade-source-check/SKILL.md) · 观点完整性检查 | “这句话是不是被我理解错了” | 核对语境、限制、来源版本与遗漏 |
 | [trade-scenario-plan](skills/trade-scenario-plan/SKILL.md) · 交易预案整理 | “按这些条件，帮我整理几种情况怎么应对” | 条件出现、未出现、失效时的预案草案 |
-| [trade-rule-cards](skills/trade-rule-cards/SKILL.md) · 心法转规则卡 | “把这次教训做成一张候选提醒卡” | 场景、边界、来源及采用状态明确的规则卡 |
+| [trade-rule-cards](skills/trade-rule-cards/SKILL.md) · 心法转规则卡 | “把这次教训做成一张候选提醒卡” | 一句提醒、具体问题及状态/来源短注 |
 
 这五项功能可分别安装，也可通过一体版的统一入口选用；都不自动运行 Agent。需要衔接时保留[上下文交接卡](shared/context-template.md)中的证据、时间和采用状态：经验与观点 → 规则 → 计划 → 操作记录 → 复盘。
 
 ## 作者经验参考库
+
+明确说“我需要建议”时，AI 会选取相关作者经验作参考，并说明不构成投资建议，请以自己的实际情况为准；参考不会自动变成个人纪律。材料仍在补充时，一般经验不能替代交易事实与最终复核。
 
 五个 Skill 均附带[12 条作者经验](shared/author-experience.md)及[来源说明](shared/author-sources.md)：条件预案、仓位与逻辑止损、风险收益、计划更新、交易身份、加仓训练、回补落空、执行评价、方法取舍、连亏暂停、回撤训练、定期自查。
 

@@ -1,0 +1,80 @@
+{
+  "version": "0.3.4",
+  "date": "2026-09-15",
+  "method": "首轮两名独立代理各持隔离技能包；K01逐轮交付用户输入，K02单轮。随后微调交付要求，再用一名全新独立代理单独运行K02。所有代理不继承维护者对话，不提前提供预期答案，最终代理未见首轮输出。",
+  "cases": [
+    {
+      "id": "K01",
+      "skill": "trade-rule-cards",
+      "zip_sha256": "d8e7f6fa6f180adf0a89f603195479577a1ddbf16559c4e047b2563ce764ebb9",
+      "snapshot": "首轮规则卡简化",
+      "matches_final_build": false,
+      "turns": [
+        {
+          "turn": 1,
+          "input": "虚构练习。我想记下这句话：“调整退出位置前，先确认现在的价格，再写一句调整依据。”此前讨论里曾出现“永远别移动止损”“随时保本”“必须留底仓”三种说法，都已经撤回，不是我采用的规则。我没有选次数、比例或等待时间。帮我整理成规则卡，先作为候选。",
+          "response": "### 调整退出位置前，先看价格、写依据\n\n**一句提醒：**调整退出位置前，先确认现在的价格，再写一句调整依据。\n\n**什么时候看：**准备调整退出位置时。\n\n**问自己：**\n\n- 我确认现在的价格了吗？\n- 我写下这次调整的依据了吗？\n\n*状态：候选，尚未采用。来源：你提供的原话；核对问题由 AI 据此整理，同为候选。*\n\n*此前三种说法均已撤回，不纳入本卡；次数、比例和等待时间均未选择。*\n",
+          "characters_including_markdown": 200,
+          "read_files": [
+            "trade-rule-cards/SKILL.md",
+            "trade-rule-cards/references/review-contract.md",
+            "trade-rule-cards/templates/rule-card.md"
+          ]
+        },
+        {
+          "turn": 2,
+          "input": "再改一下，我平时会在行情面板看价格，不用单独问价格。卡片的核心改成“调整退出安排前，先说清新依据”。只留“新依据是什么”“原计划允许这样调整吗”这两个问题，仍是候选。",
+          "response": "### 调整退出安排前，先说清新依据\n\n**一句提醒：**调整退出安排前，先说清新依据。\n\n**什么时候看：**准备调整退出安排时。\n\n**问自己：**\n\n- 新依据是什么？\n- 原计划允许这样调整吗？\n\n*状态：候选，尚未采用。来源：你本轮明确的改写和核对问题。*\n",
+          "characters_including_markdown": 133,
+          "read_files": []
+        }
+      ]
+    },
+    {
+      "id": "K02",
+      "skill": "trade-review-suite",
+      "zip_sha256": "4f00bb8ba6c149775f4617654a13bdae6147d3e2b9a905b693d2632980bda7b0",
+      "snapshot": "首轮规则卡简化",
+      "matches_final_build": false,
+      "turns": [
+        {
+          "turn": 1,
+          "input": "虚构练习。我想练习把交易结果和当时的判断、执行分开看，这里没有要复盘的真实交易。我需要一些建议，再帮我整理成一张提醒卡。先作参考，不采用新规则。",
+          "response": "### 提醒卡｜把结果、判断和执行分开看\n\n以下仅根据作者经验提供参考，不构成投资建议，请以你自己的实际情况为准，是否采用由你决定。\n\n**一句提醒：**赚了不代表判断和执行都对，亏了也不代表当时的决定必然错。\n\n**什么时候看：**用虚构案例练习复盘，看到最终结果、准备评价操作时。\n\n**问自己（AI 整理）：**\n\n- 当时已有的材料支持什么判断？\n- 实际动作与当时计划有什么异同？\n- 最终结果是什么？\n\n可以考虑先遮住结局，记录当时依据和执行，再揭晓结果；没有交代的内容写“未知”，不靠结局补出理由。执行符合计划，也不证明判断正确或策略有效；盈亏仍要如实保留。\n\n*状态：候选参考，未采用为新规则。核心经验：根据作者经验，TE08，参考库版本 2026-09-14；遮住结局的练习方式和核对问题为 AI 整理。本卡用于虚构练习，不评价任何真实交易。*\n",
+          "characters_including_markdown": 381,
+          "read_files": [
+            "SKILL.md",
+            "references/review-contract.md",
+            "modules/trade-rule-cards.md",
+            "references/author-experience.md",
+            "references/author-sources.md",
+            "templates/rule-card.md"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "K02-final",
+      "skill": "trade-review-suite",
+      "zip_sha256": "1f8ea6894187f73dd5edcfd2b68dab6e15977b254432dd6f72bbb55cece29a77",
+      "snapshot": "当轮最终规则卡简化；后续制卡前确认与固定模板修订之前",
+      "matches_final_build": false,
+      "turns": [
+        {
+          "turn": 1,
+          "input": "虚构练习。我想练习把交易结果和当时的判断、执行分开看，这里没有要复盘的真实交易。我需要一些建议，再帮我整理成一张提醒卡。先作参考，不采用新规则。",
+          "response": "### 盈亏、当时的判断和执行，分开看\n\n以下仅根据作者经验提供参考，不构成投资建议，请以你自己的实际情况为准，是否采用由你决定。\n\n**什么时候看：**虚构练习中，看到盈亏结果、准备评价这次操作时。\n\n**问自己（AI 整理）：**\n\n- 遮住后来的走势，当时的判断有哪些已知信息支持？\n- 实际操作是否符合当时适用的计划？\n\n结果照实保留；盈利不能证明判断与执行都好，亏损也不能直接否定它们。执行符合计划，仍不等于判断正确或策略有效。练习材料没交代的地方留作“未知”。\n\n*状态：候选提醒，仅作参考，未采用为新规则。来源：根据作者经验，TE08，参考库版本 2026-09-14。*\n",
+          "characters_including_markdown": 293,
+          "read_files": [
+            "SKILL.md",
+            "references/review-contract.md",
+            "modules/trade-rule-cards.md",
+            "references/author-experience.md",
+            "references/author-sources.md",
+            "templates/rule-card.md"
+          ]
+        }
+      ]
+    }
+  ]
+}

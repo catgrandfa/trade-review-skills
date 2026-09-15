@@ -10,16 +10,16 @@ Describe what you need and supply the material you have: “Review the sale I re
 
 See the Chinese [FAQ](shared/faq.md) for specific usage questions and the [continuous fictional walkthrough](skills/trade-review-suite/references/walkthrough.md) for inputs and complete illustrative answers. Each independent skill includes its own self-contained stage; the suite walkthrough is generated from those sources. Illustrative answers are authored examples, not actual model trial results.
 
-The current version is **0.3.3**. Its only suite upload ZIP is `trade-review-suite.zip`, with 29 files including the FAQ and examples. Earlier product trials do not validate 0.3.3.
+Current version: **0.3.4**. Trading evaluations collect context until the user finishes adding information. Rule cards clarify material ambiguities before drafting, use a short template, and retain stable IDs and content versions. Advice requested by the user cites relevant author experience and preserves its limits. The suite continues to have one upload ZIP.
 
 ## One installation, five capabilities
 
 The [trade-review-suite](skills/trade-review-suite/SKILL.md) skill selects the relevant module for each request and includes all references locally. It does not require the five independent skills to be installed.
 
-- [trade-review-suite.zip](https://github.com/catgrandfa/trade-review-skills/releases/download/v0.3.3/trade-review-suite.zip): `SKILL.md` directly at the ZIP root, with 29 files and no standalone `LICENSE` file.
+- [trade-review-suite.zip](https://github.com/catgrandfa/trade-review-skills/releases/download/v0.3.4/trade-review-suite.zip): `SKILL.md` directly at the ZIP root, with 29 files and no standalone `LICENSE` file.
 - The existing five ZIPs remain available for individual installation. `trade-review-skills-VERSION.zip` is a repository collection for extraction, not a single-skill upload.
 
-For local installation, add `--skill trade-review-suite` to the installer command below. The default still installs the five independent skills. All six upload ZIPs in 0.3.3 continue to omit the standalone `LICENSE` file. The shared contract and five modules have been updated; MIT metadata is retained. The [SkillHub upload check](docs/skillhub-upload-check.md) covered the 23-file 0.3.0 package. Versions 0.3.1–0.3.3 have not been retested on SkillHub; approval and installation remain unverified.
+For local installation, add `--skill trade-review-suite` to the installer command below. The default still installs the five independent skills. All six upload ZIPs in 0.3.4 continue to omit the standalone `LICENSE` file. The shared contract and five modules have been updated; MIT metadata is retained. The [SkillHub upload check](docs/skillhub-upload-check.md) covered the 23-file 0.3.0 package. Versions 0.3.1–0.3.4 have not been retested on SkillHub; approval and installation remain unverified.
 
 Version 0.3.1 has since been installed and invoked in new WorkBuddy 5.5.6 tasks, and imported from its GitHub release ZIP into ChatGPT's account skill directory for use in a new Work conversation. The [product trial report](docs/product-trials-0.3.1.md) records the exact scope and two behavioral defects; successful installation does not mean every answer passed review.
 
@@ -58,9 +58,11 @@ Instructions are Chinese-first; each skill tells the agent to follow the user's 
 
 Test with fictional input: “My plan was to wait for a pullback. Now I fear missing out and want to enter before defining invalidation. I have not supplied personal rules or market data. Review my plan.”
 
-Expect evidence-based gaps and inconsistencies, not permission to trade. The package follows the Agent Skills format. See the compatibility document for the distinction between documented support, package validation and actual product tests.
+Expect a factual recap and focused follow-up questions first. Say that you have finished supplying information when ready for the review; the summary still preserves unknowns and does not grant permission to trade. The package follows the Agent Skills format. See the compatibility document for the distinction between documented support, package validation and actual product tests.
 
 ## Author experience library
+
+When users explicitly request suggestions, the skill reads relevant author experience and identifies it as reference material, not investment advice, to be considered against their own circumstances. Suggestions do not become adopted rules, and they do not end ongoing fact collection.
 
 Each skill and text adapter includes an optional [12-lesson author experience library](shared/author-experience.md) with [source notes](shared/author-sources.md), contexts, review questions and boundaries (Chinese). Inclusion does not make a lesson a user's rule. Explicit adoption is respected without repeated confirmation; numeric examples such as risk/reward ratios, loss counts and position proportions remain separate choices. The bundled source description is “根据作者经验” (“based on the author’s experience”). It is independent of personal identities and local projects, and needs no network access at runtime.
 

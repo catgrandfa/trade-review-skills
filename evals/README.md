@@ -1,5 +1,15 @@
 # 行为试用方法
 
+稳定规则 ID 和内容版本使用 [rule-identity-cases.json](rule-identity-cases.json)，覆盖旧卡重看、候选修订、采用新版及避开已撤销编号；实际输入和输出见[本轮记录](results/0.3.4-rule-identity.md)。
+
+制卡前确认和固定简短模板见 [card-confirmation-cases.json](card-confirmation-cases.json)：逐轮检查含糊表述、内容确认、采用范围，以及用户拒绝定义后按明确原话制卡。[实际输出与局限](results/0.3.4-card-confirmation.md)单独记录，不覆盖此前快照。
+
+日常规则卡使用 [card-cases.json](card-cases.json)，检查默认小卡、按用户修改后的重写，以及建议说明与简洁性的兼容；[首轮与后续微调的实际输出](results/0.3.4-cards.md)按快照分开保留。
+
+用户明确请求建议的两案见 [advice-cases.json](advice-cases.json)，检查经验来源、提示语、采用状态与材料收集的关系；[实际记录](results/0.3.4-advice.md)与此前收集流程试用分别保存。
+
+收集与总结时机使用 [intake-cases.json](intake-cases.json)：后续输入逐条交给同一案例的代理，不提前展示；不同案例仍相互隔离。实际四组九轮输出与局限见 [0.3.4 试用记录](results/0.3.4-intake.md)。旧版单轮结果保留为历史证据，不代表新版仍应在首轮直接评价交易。
+
 首次使用与短答的输入见 [first-use-cases.json](first-use-cases.json)，实际输出与局限见 [0.3.3 试用记录](results/0.3.3-first-use.md)。这组输入不含预期答案；随包的“首次使用示范”是作者编写的说明材料，不是试用结果。
 
 口语化的品种案例见 [gold-cases.json](gold-cases.json) 与[可复制示例](../examples/gold-cases.md)，覆盖五个子技能和两种执行复盘情形。价格、交易与引用原文全部虚构。产品试用时统一附上虚构声明，只交付当前案例，不附评估预期；通过一体版调用模块与独立安装五个子技能是不同的测试范围。

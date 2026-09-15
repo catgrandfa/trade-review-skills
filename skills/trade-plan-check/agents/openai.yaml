@@ -1,4 +1,4 @@
 interface:
   display_name: "开单前计划核对"
   short_description: "核对开单前的判断依据、触发条件、风险安排与原计划的一致性"
-  default_prompt: "请用 $trade-plan-check 核对我准备做的这一步与原计划是否一致，先说关键差异和缺项。"
+  default_prompt: "请用 $trade-plan-check 帮我核对这次打算，先收集背景，等我补充完再总结。"
