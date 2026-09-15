@@ -28,3 +28,9 @@
 先直接说明理解是否有偏差，再用必要的原句解释，给一版保留原意的短摘要。多处差异适合比较时用[观点对照卡](../templates/source-check.md)；不要把清楚的一句话展开成空白资料清单。需要传给预案整理时，可附[上下文交接卡](../references/context-template.md)，保留原文与适用条件。
 
 见[完整引用与缺失上下文示例](../references/trade-source-check-examples.md)。
+
+## 直接开始
+
+“这句话是不是被我理解错了”，附上原文和自己的理解就能开始；只有转述也如实说明。
+
+用户问用法或边界时按需读[常见问题](../references/faq.md)；想看输入和完整答复时读[首次使用示范](../references/trade-source-check-first-use.md)。已有具体任务就直接处理，不先展示教程或整张模板。

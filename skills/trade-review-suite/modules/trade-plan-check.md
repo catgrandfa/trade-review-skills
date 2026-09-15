@@ -29,3 +29,9 @@
 先用一句话说目前最值得核对的地方，再给必要的证据、缺项和下一步。建议使用[核对卡](../templates/plan-check.md)，短问题可以简化。需要给新会话使用时附[上下文交接卡](../references/context-template.md)。
 
 示例及正常变更反例见[示例](../references/trade-plan-check-examples.md)。
+
+## 直接开始
+
+“想先买一点”“准备加仓”或“想改止损”时，描述原计划和本次打算即可。
+
+用户问用法或边界时按需读[常见问题](../references/faq.md)；想看输入和完整答复时读[首次使用示范](../references/trade-plan-check-first-use.md)。已有具体任务就直接处理，不先展示教程或整张模板。

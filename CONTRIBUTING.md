@@ -29,4 +29,4 @@ git diff --check
 
 更新 `VERSION` 与 `CHANGELOG.md`，生成并校验发布资产。检查暂存文件只含本项目公开内容，提交后推送。以 `v` 加版本号创建 GitHub Release，上传 `dist/SHA256SUMS` 列出的资产及该校验文件。
 
-五个独立技能包各包含一个顶层目录。一体版生成两个资产：`trade-review-suite.zip` 根部直接含 `SKILL.md`；`trade-review-suite-folder.zip` 包一层同名技能目录。集合包供解压使用，不用于某个平台的单技能上传入口。未完成平台账号试跑时，兼容矩阵保留“未实测”。
+五个独立技能包各包含一个顶层目录。一体版只生成 `trade-review-suite.zip`，根部直接含 `SKILL.md`；构建会清除本地遗留的 `trade-review-suite-folder.zip`，不再把它列入校验和或发布资产。集合包供解压使用，不用于某个平台的单技能上传入口。未完成平台账号试跑时，兼容矩阵保留“未实测”。

@@ -4,15 +4,22 @@ Five portable AI skills and an optional unified entrypoint for reviewing a trade
 
 [中文](README.md) · [Downloads](https://github.com/catgrandfa/trade-review-skills/releases/latest) · [Installation](docs/installation.md) · [Compatibility](docs/compatibility.md)
 
+## Start with a normal question
+
+Describe what you need and supply the material you have: “Review the sale I regret,” “Check my proposed stop adjustment,” or “Turn this lesson into a candidate reminder.” The suite selects the relevant capability; users do not need to choose modules, fill a form, or learn evidence IDs first.
+
+See the Chinese [FAQ](shared/faq.md) for specific usage questions and the [continuous fictional walkthrough](skills/trade-review-suite/references/walkthrough.md) for inputs and complete illustrative answers. Each independent skill includes its own self-contained stage; the suite walkthrough is generated from those sources. Illustrative answers are authored examples, not actual model trial results.
+
+The current version is **0.3.3**. Its only suite upload ZIP is `trade-review-suite.zip`, with 29 files including the FAQ and examples. Earlier product trials do not validate 0.3.3.
+
 ## One installation, five capabilities
 
 The [trade-review-suite](skills/trade-review-suite/SKILL.md) skill selects the relevant module for each request and includes all references locally. It does not require the five independent skills to be installed.
 
-- [trade-review-suite.zip](https://github.com/catgrandfa/trade-review-skills/releases/download/v0.3.2/trade-review-suite.zip): `SKILL.md` directly at the ZIP root, with 22 files and no standalone `LICENSE` file.
-- [trade-review-suite-folder.zip](https://github.com/catgrandfa/trade-review-skills/releases/download/v0.3.2/trade-review-suite-folder.zip): identical skill content wrapped in one `trade-review-suite/` folder, for folder-based importers.
+- [trade-review-suite.zip](https://github.com/catgrandfa/trade-review-skills/releases/download/v0.3.3/trade-review-suite.zip): `SKILL.md` directly at the ZIP root, with 29 files and no standalone `LICENSE` file.
 - The existing five ZIPs remain available for individual installation. `trade-review-skills-VERSION.zip` is a repository collection for extraction, not a single-skill upload.
 
-For local installation, add `--skill trade-review-suite` to the installer command below. The default still installs the five independent skills. All seven upload ZIPs in 0.3.2 continue to omit the standalone `LICENSE` file. The shared contract and five modules have been updated; MIT metadata is retained. The [SkillHub upload check](docs/skillhub-upload-check.md) covered the 23-file 0.3.0 package. Versions 0.3.1 and 0.3.2 have not been retested on SkillHub; approval and installation remain unverified.
+For local installation, add `--skill trade-review-suite` to the installer command below. The default still installs the five independent skills. All six upload ZIPs in 0.3.3 continue to omit the standalone `LICENSE` file. The shared contract and five modules have been updated; MIT metadata is retained. The [SkillHub upload check](docs/skillhub-upload-check.md) covered the 23-file 0.3.0 package. Versions 0.3.1–0.3.3 have not been retested on SkillHub; approval and installation remain unverified.
 
 Version 0.3.1 has since been installed and invoked in new WorkBuddy 5.5.6 tasks, and imported from its GitHub release ZIP into ChatGPT's account skill directory for use in a new Work conversation. The [product trial report](docs/product-trials-0.3.1.md) records the exact scope and two behavioral defects; successful installation does not mean every answer passed review.
 

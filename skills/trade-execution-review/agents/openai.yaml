@@ -1,4 +1,4 @@
 interface:
   display_name: "交易行为复盘"
   short_description: "对照事前计划与实际操作，分别复盘判断依据、执行过程和盈亏结果"
-  default_prompt: "请用 $trade-execution-review 根据我提供的材料完成交易行为复盘。"
+  default_prompt: "请用 $trade-execution-review 复盘我已经做过的操作，分清执行情况和盈亏结果。"

@@ -1,4 +1,4 @@
 interface:
   display_name: "交易决策复核一体版"
   short_description: "按任务调用计划核对、执行复盘、观点检查、预案整理与规则卡五个模块"
-  default_prompt: "请用 $trade-review-suite 根据我提供的材料完成交易决策复核一体版。"
+  default_prompt: "请用 $trade-review-suite 根据我描述的事情选择需要的功能，先说能确定的结论和关键缺项。"

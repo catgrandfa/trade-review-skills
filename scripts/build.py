@@ -8,7 +8,7 @@ import posixpath
 import zipfile
 from pathlib import Path
 
-from project import CATALOG, DISTRIBUTIONS, LINK, ROOT, SUITE_NAME, frontmatter, skill_files
+from project import CATALOG, DEFAULT_PROMPTS, DISTRIBUTIONS, LINK, ROOT, SUITE_NAME, frontmatter, skill_files
 
 
 def inline_links(text: str) -> str:
@@ -21,6 +21,8 @@ def suite_path(name: str, relative: str) -> str:
         return f"modules/{name}.md"
     if relative == "references/examples.md":
         return f"references/{name}-examples.md"
+    if relative == "references/first-use.md":
+        return f"references/{name}-first-use.md"
     return relative
 
 
@@ -41,7 +43,7 @@ def suite_links(text: str, name: str, source: str) -> str:
 def generated_files(root: Path) -> dict[Path, bytes]:
     output = {}
     common = [root / "shared" / name for name in (
-        "review-contract.md", "context-template.md", "author-experience.md", "author-sources.md")]
+        "review-contract.md", "context-template.md", "author-experience.md", "author-sources.md", "faq.md")]
     intro = ("# 交易决策复核 · 聊天适配版\n\n"
              "请按本文件处理我随后提供的任务和材料。按任务选择对应模块；"
              "示例全部为虚构，不作为我的规则、持仓或操作。没有外部文件读取、行情或下单依赖。\n\n")
@@ -54,13 +56,14 @@ def generated_files(root: Path) -> dict[Path, bytes]:
         output[folder / "LICENSE"] = (root / "LICENSE").read_bytes()
         metadata = (f'interface:\n  display_name: "{title}"\n'
                     f'  short_description: "{description}"\n'
-                    f'  default_prompt: "请用 ${name} 根据我提供的材料完成{title}。"\n')
+                    f'  default_prompt: "请用 ${name} {DEFAULT_PROMPTS[name]}。"\n')
         output[folder / "agents" / "openai.yaml"] = metadata.encode("utf-8")
     suite_folder = root / "skills" / SUITE_NAME
     for name in CATALOG:
         folder = root / "skills" / name
         _, body = frontmatter(folder / "SKILL.md")
-        extras = [folder / "references" / "examples.md", *sorted((folder / "templates").glob("*.md"))]
+        extras = [folder / "references" / "examples.md", folder / "references" / "first-use.md",
+                  *sorted((folder / "templates").glob("*.md"))]
         output[suite_folder / suite_path(name, "SKILL.md")] = (
             suite_links(body, name, "SKILL.md") + "\n").encode("utf-8")
         for source in extras:
@@ -74,8 +77,19 @@ def generated_files(root: Path) -> dict[Path, bytes]:
         sections.append(section)
         output[root / "adapters" / "plain-chat" / f"{name}.md"] = (
             intro + common_text + "\n\n" + section + "\n").encode("utf-8")
+    walkthrough_order = ("trade-source-check", "trade-scenario-plan", "trade-plan-check",
+                         "trade-execution-review", "trade-rule-cards")
+    output[suite_folder / "references/walkthrough.md"] = (
+        "# 一次交易从想法到复盘：连续虚构演示\n\n"
+        "按阶段提供输入，避免把事后结果提前用于事前判断。每段自带必要上下文，也可单独试用。"
+        "这些示范答复由作者编写，不是实际模型测试结果；不要求每次运行五个模块。"
+        "本文件由五个独立技能的首次使用示范自动汇成，不单独维护。\n\n" +
+        "\n\n".join(output[suite_folder / suite_path(name, "references/first-use.md")].decode().strip()
+                    for name in walkthrough_order) + "\n"
+    ).encode("utf-8")
     output[suite_folder / "references/examples.md"] = (
-        "# 虚构示例\n\n按当前任务选择示例，不把示例当作使用者的材料。\n\n" +
+        "# 虚构示例\n\n首次想看完整答复时，读[连续虚构演示](walkthrough.md)。"
+        "核对特定边界时，从下面选择示例；不把示例当作使用者的材料。\n\n" +
         "\n".join(f"- [{title}]({name}-examples.md)" for name, (title, _) in CATALOG.items()) + "\n"
     ).encode("utf-8")
     _, routing = frontmatter(suite_folder / "SKILL.md")
@@ -108,10 +122,9 @@ def release_files(root: Path) -> dict[Path, bytes]:
         # Upload packages omit the standalone license; source distributions retain it.
         upload_files = {path: data for path, data in files.items() if path != f"{name}/LICENSE"}
         if name == SUITE_NAME:
-            # Root-level SKILL.md for strict uploaders; folder variant for directory-based importers.
+            # A single canonical suite upload asset, with SKILL.md at the ZIP root.
             output[root / "dist" / f"{name}.zip"] = zip_bytes(
                 {path.removeprefix(f"{name}/"): data for path, data in upload_files.items()})
-            output[root / "dist" / f"{name}-folder.zip"] = zip_bytes(upload_files)
         else:
             output[root / "dist" / f"{name}.zip"] = zip_bytes(upload_files)
         bundle.update({f"trade-review-skills/skills/{path}": data for path, data in files.items()})
@@ -158,6 +171,13 @@ def write_files(files: dict[Path, bytes], check: bool = False) -> None:
 
 def build(root: Path = ROOT, check: bool = False) -> None:
     write_files(generated_files(root), check)
+    retired = root / "dist" / f"{SUITE_NAME}-folder.zip"
+    if retired.is_symlink() or any(parent.is_symlink() for parent in retired.parents):
+        raise ValueError(f"Refusing retired output through symlink: {retired}")
+    if retired.exists():
+        if check or not retired.is_file():
+            raise ValueError(f"Retired release asset remains: {retired}")
+        retired.unlink()
     write_files(release_files(root), check)
 
 

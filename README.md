@@ -4,7 +4,17 @@
 
 提供五个可独立安装的 AI Skill，以及一次安装即可使用五项功能的统一入口版，帮助个人交易者理清想法、核对计划、检查观点、记录执行。使用者提供自己的规则和材料即可开始；无需行情接口、券商账户或 API Key。
 
-[让 AI 安装](#直接让-ai-从仓库安装) · [下载安装包](https://github.com/catgrandfa/trade-review-skills/releases/latest) · [安装指南](docs/installation.md) · [完整演示](examples/walkthrough.md) · [验证与限制](docs/validation.md) · [English](README.en.md)
+[先试一次](#先试一次) · [让 AI 安装](#直接让-ai-从仓库安装) · [下载安装包](https://github.com/catgrandfa/trade-review-skills/releases/latest) · [常见问题](shared/faq.md) · [完整演示](skills/trade-review-suite/references/walkthrough.md) · [验证与限制](docs/validation.md) · [English](README.en.md)
+
+## 从一句话开始
+
+直接说这次想做什么，再贴已有材料即可，例如“我卖飞了，帮我复盘”或“想改止损，帮我核对”。使用一体版时，无需先选模块、填表或学习编号；只安装独立版时，使用对应功能。具体例句见[五个 Skill](#五个-skill)。
+
+第一次想知道会得到什么，可以看[从观点、预案到执行复盘的完整演示](skills/trade-review-suite/references/walkthrough.md)：每一段都有可复制输入和示范答复。已有材料就直接开始，只有遇到用法问题时才需要查[FAQ](shared/faq.md)。
+
+当前版本为 **0.3.3**：新增 FAQ 和随包示范，一体版只提供 `trade-review-suite.zip`，共 29 个文件。历史产品测试不代表已验证 0.3.3。
+
+[六案独立试用](evals/results/0.3.3-first-use.md)保留实际答复和局限：本轮未发现事实或路由错误，部分答复仍略长，尚不能据此声称各平台都稳定简洁。
 
 ## 一次安装全部功能
 
@@ -12,12 +22,11 @@
 
 | 文件 | 用途 |
 | --- | --- |
-| [trade-review-suite.zip](https://github.com/catgrandfa/trade-review-skills/releases/download/v0.3.2/trade-review-suite.zip) | 一体版，ZIP 根部直接是 `SKILL.md`，共 22 个文件，无独立 `LICENSE` 文件 |
-| [trade-review-suite-folder.zip](https://github.com/catgrandfa/trade-review-skills/releases/download/v0.3.2/trade-review-suite-folder.zip) | 相同内容，外包一层 `trade-review-suite/` 目录；用于要求单技能文件夹的上传入口 |
+| [trade-review-suite.zip](https://github.com/catgrandfa/trade-review-skills/releases/download/v0.3.3/trade-review-suite.zip) | 一体版，ZIP 根部直接是 `SKILL.md`，共 29 个文件，无独立 `LICENSE` 文件 |
 | `trade-plan-check.zip` 等五个包 | 按需分别安装独立技能 |
 | `trade-review-skills-版本号.zip` | 仓库分发集合，解压后选择技能；不能直接当作一个技能上传 |
 
-本地安装一体版可执行 `python3 scripts/install.py --target codex --skill trade-review-suite`；其他工具见[安装指南](docs/installation.md)。五个独立版仍可使用，一体版无需同时安装它们。0.3.2 的七个上传 ZIP 继续排除独立 `LICENSE` 文件；五个模块和共同约定已更新，MIT 元数据保留。SkillHub 的[文件识别实测](docs/skillhub-upload-check.md)针对含 23 个文件的 0.3.0；新版尚未在 SkillHub 重测，不据此声称审核或安装运行通过。
+本地安装一体版可执行 `python3 scripts/install.py --target codex --skill trade-review-suite`；其他工具见[安装指南](docs/installation.md)。五个独立版仍可使用，一体版无需同时安装它们。0.3.3 的六个上传 ZIP 继续排除独立 `LICENSE` 文件；五个模块和共同约定已更新，MIT 元数据保留。SkillHub 的[文件识别实测](docs/skillhub-upload-check.md)针对含 23 个文件的 0.3.0；新版尚未在 SkillHub 重测，不据此声称审核或安装运行通过。
 
 0.3.1 已在 WorkBuddy 5.5.6 完成用户级安装与新任务调用，也已通过 ChatGPT 账号技能页导入 GitHub 发布 ZIP 并在新对话调用。[产品实测记录](docs/product-trials-0.3.1.md)保留全部测试范围和发现的两项行为缺陷，不把安装成功等同于所有回答通过。
 
@@ -52,13 +61,13 @@
 
 ## 五个 Skill
 
-| Skill | 适合什么时候用 | 交付内容 |
+| Skill | 可以这样问 | 交付内容 |
 | --- | --- | --- |
-| [trade-plan-check](skills/trade-plan-check/SKILL.md) · 开单前计划核对 | 想开仓、加仓或临时改计划 | 完整性、前后差异、规则对照及缺项 |
-| [trade-execution-review](skills/trade-execution-review/SKILL.md) · 交易行为复盘 | 操作结束或阶段复盘 | 事前计划、实际执行、结果分开评价 |
-| [trade-source-check](skills/trade-source-check/SKILL.md) · 观点完整性检查 | 想把视频、文章的一句话用于自己的交易 | 补全语境、限制、来源版本与遗漏 |
-| [trade-scenario-plan](skills/trade-scenario-plan/SKILL.md) · 交易预案整理 | 已有判断，需要整理条件分支 | 条件出现、未出现、失效时的预案草案 |
-| [trade-rule-cards](skills/trade-rule-cards/SKILL.md) · 心法转规则卡 | 想把经验变成临场可核对的提醒 | 场景、边界、来源及采用状态明确的规则卡 |
+| [trade-plan-check](skills/trade-plan-check/SKILL.md) · 开单前计划核对 | “想改止损，帮我核对这次打算” | 完整性、前后差异、规则对照及缺项 |
+| [trade-execution-review](skills/trade-execution-review/SKILL.md) · 交易行为复盘 | “我卖飞了，帮我复盘这次操作” | 事前计划、实际执行、结果分开评价 |
+| [trade-source-check](skills/trade-source-check/SKILL.md) · 观点完整性检查 | “这句话是不是被我理解错了” | 核对语境、限制、来源版本与遗漏 |
+| [trade-scenario-plan](skills/trade-scenario-plan/SKILL.md) · 交易预案整理 | “按这些条件，帮我整理几种情况怎么应对” | 条件出现、未出现、失效时的预案草案 |
+| [trade-rule-cards](skills/trade-rule-cards/SKILL.md) · 心法转规则卡 | “把这次教训做成一张候选提醒卡” | 场景、边界、来源及采用状态明确的规则卡 |
 
 这五项功能可分别安装，也可通过一体版的统一入口选用；都不自动运行 Agent。需要衔接时保留[上下文交接卡](shared/context-template.md)中的证据、时间和采用状态：经验与观点 → 规则 → 计划 → 操作记录 → 复盘。
 

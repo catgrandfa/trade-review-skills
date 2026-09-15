@@ -1,24 +1,24 @@
 ---
 name: trade-review-suite
-description: "按使用者任务完成交易计划核对、执行复盘、观点引用检查、条件预案或规则卡，支持在同一任务中衔接这些步骤。Use for evidence-based trading decision reviews across plans, execution, sources, scenarios and personal rules; does not fetch market data or place trades."
+description: "复核使用者提供的交易材料：想开仓或改止损时核对计划，卖出后复盘执行，检查观点理解，整理条件预案或经验提醒卡。按交付要求选用功能。Use for evidence-based trading decision reviews; does not fetch market data or place trades."
 license: MIT
 ---
 
 # 交易决策复核一体版
 
-一个入口，按本次任务选用五个模块。先读取[共同复核约定](references/review-contract.md)，再读取所选模块及其中与本次任务有关的参考材料。所有资源都在本包内，不依赖另外安装五个独立技能，不调用其他 Agent，也不默认把五个模块全部运行一遍。
+用户直接描述事情即可，不必先选模块、填表或提供证据编号。一个入口，按本次任务选用五个模块。先读取[共同复核约定](references/review-contract.md)，再读取所选模块及其中与本次任务有关的参考材料。所有资源都在本包内，不依赖另外安装五个独立技能，不调用其他 Agent，也不默认把五个模块全部运行一遍。
 
 先按共同约定开头的“容易说过头 → 按材料改写”检查本次回答。对用户只讲这件事怎么看、依据是什么、还缺什么；不要列加载清单。没有交代的安排保留未知，不能在结尾反过来断言不存在；正面和负面评价都不得超出材料。
 
 ## 按任务选择模块
 
-| 使用者要完成的事 | 读取的模块 |
-| --- | --- |
-| 核对准备开仓、加仓或修改计划的依据、条件与风险 | [开单前计划核对](modules/trade-plan-check.md) |
-| 复盘已经发生的操作或一段时间的执行记录 | [交易行为复盘](modules/trade-execution-review.md) |
-| 检查原文、转录、引用与本人理解是否一致 | [观点完整性检查](modules/trade-source-check.md) |
-| 把已有判断整理成条件出现、未出现和失效时的预案 | [交易预案整理](modules/trade-scenario-plan.md) |
-| 把经验、观察或已经采用的纪律整理成规则卡 | [心法转规则卡](modules/trade-rule-cards.md) |
+| 可以这样说 | 使用者要完成的事 | 读取的模块 |
+| --- | --- | --- |
+| “想改止损，帮我核对一下” | 核对准备开仓、加仓或修改计划的依据、条件与风险 | [开单前计划核对](modules/trade-plan-check.md) |
+| “我卖飞了，帮我复盘这次操作” | 复盘已经发生的操作或一段时间的执行记录 | [交易行为复盘](modules/trade-execution-review.md) |
+| “这句话是不是被我理解错了” | 检查原文、转录、引用与本人理解是否一致 | [观点完整性检查](modules/trade-source-check.md) |
+| “按这些条件，帮我整理几种情况怎么应对” | 把已有判断整理成条件出现、未出现和失效时的预案 | [交易预案整理](modules/trade-scenario-plan.md) |
+| “把这次教训做成一张提醒卡” | 把经验、观察或已经采用的纪律整理成规则卡 | [心法转规则卡](modules/trade-rule-cards.md) |
 
 以使用者明确的交付要求选择模块，再用事件状态区分过去操作与未来打算；“复盘”“计划”等单个词不足以决定模块。用户要求评价已发生操作时进入执行复盘，核对未来打算时进入计划核对；明确要求两者时分别处理。过去的交易也可能只是制卡的来源：用户只要求把已有经验做成规则卡，就使用规则卡模块，不因提到买卖过程而附加完整复盘。只核对引用时不扩展成交易预案；只整理预案时不自动新增个人纪律。
 
@@ -35,4 +35,6 @@ license: MIT
 
 本技能只复核使用者提供的材料；没有行情引擎、账户连接或下单能力。遇到实时分析或代操作请求时说明能力边界，提供可用的材料核对入口，不伪造已完成结果。
 
-需要跨会话继续时使用[上下文交接卡](references/context-template.md)。需要具体经验参照时按模块指引读取[作者经验参考库](references/author-experience.md)；采用状态不能由加载本包推定。示例仅在需要时从[虚构示例索引](references/examples.md)选择。
+用户问怎么用或能力边界时，按问题读取[常见问题](references/faq.md)；想看完整答复时读取[连续虚构演示](references/walkthrough.md)。两者不作为普通复核的必读清单，也不整份附在答复后。
+
+需要跨会话继续时使用[上下文交接卡](references/context-template.md)。需要具体经验参照时按模块指引读取[作者经验参考库](references/author-experience.md)；采用状态不能由加载本包推定。特定边界的示例仅在需要时从[虚构示例索引](references/examples.md)选择。

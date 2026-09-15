@@ -55,8 +55,7 @@ class DistributionTests(unittest.TestCase):
         from io import BytesIO
         assets = release_files(ROOT)
         layouts = [(name, f"{name}.zip", f"{name}/") for name in CATALOG]
-        layouts.extend([(SUITE_NAME, f"{SUITE_NAME}.zip", ""),
-                        (SUITE_NAME, f"{SUITE_NAME}-folder.zip", f"{SUITE_NAME}/")])
+        layouts.append((SUITE_NAME, f"{SUITE_NAME}.zip", ""))
         for name, filename, prefix in layouts:
             with self.subTest(archive=filename):
                 source = ROOT / "skills" / name
@@ -67,24 +66,36 @@ class DistributionTests(unittest.TestCase):
                     self.assertEqual({path: archive.read(path) for path in archive.namelist()}, expected)
                 self.assertEqual((source / "LICENSE").read_bytes(), (ROOT / "LICENSE").read_bytes())
 
-    def test_suite_zip_layouts_work_without_independent_skills(self) -> None:
+    def test_suite_zip_works_without_independent_skills(self) -> None:
         from io import BytesIO
         assets = release_files(ROOT)
-        for suffix, prefix in (("", ""), ("-folder", f"{SUITE_NAME}/")):
-            folder = self.base / ("flat" if not suffix else "wrapped") / SUITE_NAME
-            with zipfile.ZipFile(BytesIO(assets[ROOT / "dist" / f"{SUITE_NAME}{suffix}.zip"])) as archive:
-                self.assertEqual([n for n in archive.namelist() if n.endswith("SKILL.md")],
-                                 [prefix + "SKILL.md"])
-                self.assertEqual(len([n for n in archive.namelist() if n.startswith(prefix + "modules/")]), 5)
-                self.assertTrue(all(".." not in Path(n).parts and not Path(n).is_absolute()
-                                    for n in archive.namelist()))
-                archive.extractall(folder.parent if suffix else folder)
-            validate_skill(folder, upload_package=True)
-            self.assertEqual({p.name for p in folder.parent.iterdir()}, {SUITE_NAME})
-            for name in CATALOG:
-                _, authored = frontmatter(ROOT / "skills" / name / "SKILL.md")
-                module = (folder / "modules" / f"{name}.md").read_text(encoding="utf-8")
-                self.assertEqual(inline_links(module.strip()), inline_links(authored))
+        folder = self.base / SUITE_NAME
+        with zipfile.ZipFile(BytesIO(assets[ROOT / "dist" / f"{SUITE_NAME}.zip"])) as archive:
+            self.assertEqual([n for n in archive.namelist() if n.endswith("SKILL.md")], ["SKILL.md"])
+            self.assertEqual(len([n for n in archive.namelist() if n.startswith("modules/")]), 5)
+            self.assertTrue(all(".." not in Path(n).parts and not Path(n).is_absolute()
+                                for n in archive.namelist()))
+            archive.extractall(folder)
+        validate_skill(folder, upload_package=True)
+        self.assertEqual({p.name for p in folder.parent.iterdir()}, {SUITE_NAME})
+        for name in CATALOG:
+            _, authored = frontmatter(ROOT / "skills" / name / "SKILL.md")
+            module = (folder / "modules" / f"{name}.md").read_text(encoding="utf-8")
+            self.assertEqual(inline_links(module.strip()), inline_links(authored))
+
+    def test_build_retires_duplicate_suite_zip(self) -> None:
+        root = self.copy_project()
+        build(root)
+        retired = root / "dist" / f"{SUITE_NAME}-folder.zip"
+        retired.write_bytes(b"synthetic retired build output")
+        with self.assertRaisesRegex(ValueError, "Retired release asset remains"):
+            build(root, check=True)
+        build(root)
+        validate(root)
+        self.assertFalse(retired.exists())
+        self.assertEqual({p.name for p in (root / "dist").glob(f"{SUITE_NAME}*.zip")},
+                         {f"{SUITE_NAME}.zip"})
+        self.assertNotIn(retired.name, (root / "dist/SHA256SUMS").read_text(encoding="utf-8"))
 
     def test_independent_edits_reach_suite_modules_templates_and_examples(self) -> None:
         root = self.copy_project()
@@ -94,6 +105,7 @@ class DistributionTests(unittest.TestCase):
             "SKILL.md": "modules/trade-plan-check.md",
             "templates/plan-check.md": "templates/plan-check.md",
             "references/examples.md": "references/trade-plan-check-examples.md",
+            "references/first-use.md": "references/trade-plan-check-first-use.md",
         }
         for source, target in changes.items():
             with (skill / source).open("a", encoding="utf-8") as stream:
@@ -105,6 +117,20 @@ class DistributionTests(unittest.TestCase):
         with zipfile.ZipFile(root / "dist" / f"{SUITE_NAME}.zip") as archive:
             for source, target in changes.items():
                 self.assertIn(f"虚构构建校验：{source}", archive.read(target).decode("utf-8"))
+            self.assertIn("虚构构建校验：references/first-use.md",
+                          archive.read("references/walkthrough.md").decode("utf-8"))
+        self.assertIn("虚构构建校验：references/first-use.md",
+                      (root / "adapters/plain-chat/trade-plan-check.md").read_text(encoding="utf-8"))
+
+    def test_packaged_walkthrough_preserves_each_standalone_example(self) -> None:
+        from io import BytesIO
+        assets = release_files(ROOT)
+        with zipfile.ZipFile(BytesIO(assets[ROOT / "dist" / f"{SUITE_NAME}.zip"])) as archive:
+            walkthrough = inline_links(archive.read("references/walkthrough.md").decode())
+            self.assertEqual((ROOT / "shared/faq.md").read_bytes(), archive.read("references/faq.md"))
+            for name in CATALOG:
+                source = ROOT / "skills" / name / "references/first-use.md"
+                self.assertIn(inline_links(source.read_text(encoding="utf-8").strip()), walkthrough)
 
     def test_suite_install_is_complete_and_preserves_customization(self) -> None:
         dest = self.base / "suite-only"

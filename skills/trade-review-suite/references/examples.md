@@ -1,6 +1,6 @@
 # 虚构示例
 
-按当前任务选择示例，不把示例当作使用者的材料。
+首次想看完整答复时，读[连续虚构演示](walkthrough.md)。核对特定边界时，从下面选择示例；不把示例当作使用者的材料。
 
 - [开单前计划核对](trade-plan-check-examples.md)
 - [交易行为复盘](trade-execution-review-examples.md)

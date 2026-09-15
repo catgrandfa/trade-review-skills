@@ -29,3 +29,9 @@
 先用短句说明这份草案在等什么、何时取消。简单情形按“如果……就……”列必要分支即可，复杂情形用[情景预案卡](../templates/scenario-plan.md)。关键待定义项集中列一次；未实际写入使用者指定位置时，用“整理为草案”，不说“已保存”。需要衔接执行记录时附[上下文交接卡](../references/context-template.md)，保留来源和草案/确认状态。
 
 见[具体条件与模糊条件示例](../references/trade-scenario-plan-examples.md)。
+
+## 直接开始
+
+“按这些条件，帮我整理几种情况怎么应对”，附上已有判断和自己的打算即可。
+
+用户问用法或边界时按需读[常见问题](../references/faq.md)；想看输入和完整答复时读[首次使用示范](../references/trade-scenario-plan-first-use.md)。已有具体任务就直接处理，不先展示教程或整张模板。

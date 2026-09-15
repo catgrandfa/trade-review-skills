@@ -87,7 +87,7 @@ Codex 可在下一轮查看技能列表，未出现时重启；Claude Code 新�
 
 有上传入口但你不能操作时，准备[最新 Release](https://github.com/catgrandfa/trade-review-skills/releases/latest)中的五个单技能 ZIP，指出需要使用者导入的入口，状态写“已准备安装包，待导入”。不要把临时下载当成账号安装。
 
-若选择一体版，按入口要求准备 `trade-review-suite.zip`（根部直接有 `SKILL.md`）或 `trade-review-suite-folder.zip`（一层技能目录）。检查文件清单再上传，不使用 `trade-review-skills-版本号.zip` 集合。若所选版本的 Release 尚未包含这些资产，可从同版本 checkout 取得完整 `skills/trade-review-suite` 目录，按所需层级压缩；不要把本地生成说成已发布。
+若选择一体版，准备唯一的 `trade-review-suite.zip`（根部直接有 `SKILL.md`）。检查文件清单再上传，不使用 `trade-review-skills-版本号.zip` 集合。若实际入口明确要求技能目录，将包内全部内容解压到同名目录并按入口要求上传；保留完整配套资源，不把本地调整说成产品已验证。
 
 只支持聊天或读取网页时，读取[完整单文件文本版](adapters/plain-chat/trade-review-suite.md)，或使用[原始文本地址](https://raw.githubusercontent.com/catgrandfa/trade-review-skills/main/adapters/plain-chat/trade-review-suite.md)。全文包含所有模块、共同约定、12 条经验、来源和模板，不需要递归追踪相对路径。确认完整读取后，可按它处理本轮材料；读取失败或内容不全时如实说明，提供文件上传入口，不假称已加载。
 

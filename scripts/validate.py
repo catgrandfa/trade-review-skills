@@ -22,7 +22,7 @@ def validate_skill(folder: Path, *, upload_package: bool = False) -> None:
         raise ValueError(f"Invalid skill body/license: {folder}")
     required = {"SKILL.md", "references/review-contract.md", "references/context-template.md",
                 "references/author-experience.md", "references/author-sources.md",
-                "references/examples.md", "agents/openai.yaml"}
+                "references/examples.md", "references/faq.md", "agents/openai.yaml"}
     files = skill_files(folder)
     if upload_package:
         if any(p.name == "LICENSE" for p in files):
@@ -31,6 +31,10 @@ def validate_skill(folder: Path, *, upload_package: bool = False) -> None:
         required.add("LICENSE")
     if name == SUITE_NAME:
         required.update(f"modules/{module}.md" for module in CATALOG)
+        required.add("references/walkthrough.md")
+        required.update(f"references/{module}-first-use.md" for module in CATALOG)
+    else:
+        required.add("references/first-use.md")
     if not required.issubset({p.relative_to(folder).as_posix() for p in files}):
         raise ValueError(f"Missing standalone resources: {folder}")
     for path in files:
@@ -56,14 +60,13 @@ def validate(root: Path = ROOT) -> None:
             if set(archive.namelist()) != expected or archive.testzip() is not None:
                 raise ValueError(f"Incorrect standalone ZIP: {name}")
     folder = root / "skills" / SUITE_NAME
-    for filename, prefix in ((f"{SUITE_NAME}.zip", ""), (f"{SUITE_NAME}-folder.zip", f"{SUITE_NAME}/")):
-        with zipfile.ZipFile(root / "dist" / filename) as archive:
-            expected = {prefix + p.relative_to(folder).as_posix()
-                        for p in skill_files(folder) if p.name != "LICENSE"}
-            if set(archive.namelist()) != expected or archive.testzip() is not None:
-                raise ValueError(f"Incorrect suite ZIP: {filename}")
+    with zipfile.ZipFile(root / "dist" / f"{SUITE_NAME}.zip") as archive:
+        expected = {p.relative_to(folder).as_posix()
+                    for p in skill_files(folder) if p.name != "LICENSE"}
+        if set(archive.namelist()) != expected or archive.testzip() is not None:
+            raise ValueError(f"Incorrect suite ZIP: {SUITE_NAME}.zip")
 
 
 if __name__ == "__main__":
     validate()
-    print("PASS: 5 standalone skills, 1 unified suite, both suite ZIP layouts, local references, generated adapters and checksums.")
+    print("PASS: 5 standalone skills, 1 unified suite ZIP, local references, generated adapters and checksums.")
